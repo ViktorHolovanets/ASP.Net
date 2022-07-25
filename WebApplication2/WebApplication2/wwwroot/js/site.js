@@ -13,14 +13,16 @@ $(() => {
 
     },
         1000);
-    $('#nextQuote').on('click',function() {
-        $.ajax({
-            url: "https://api.quotable.io/random",
-            dataType: "json"
-        }).done(function (data) {
-            $('#content-quote').text(`${data.content}`);
-            $('#autor').text(`${data.author}`);
-           console.log(data);
+    $('#nextQuote').on('click',
+        function() {
+            $.ajax({
+                url: "https://api.quotable.io/random",
+                dataType: "json"
+            }).done(function(data) {
+                $('#content-quote').text(`${data.content}`);
+                $('#autor').text(`${data.author}`);
+                console.log(data);
+            });
         });
-    })
+    $('#nextQuote').click();
 });

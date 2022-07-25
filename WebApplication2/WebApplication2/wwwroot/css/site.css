@@ -95,7 +95,7 @@ h2 {
 }
 #nextQuote {
     background-color: blanchedalmond;
-    width: 75px;
+    min-width: 100px;
     text-align: center;
     border: none;
     border-radius: 5px;
