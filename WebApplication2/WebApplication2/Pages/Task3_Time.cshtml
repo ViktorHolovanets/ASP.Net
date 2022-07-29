@@ -1,4 +1,6 @@
 ﻿@page
+@using Microsoft.VisualBasic
+@using System.Threading
 @model WebApplication2.Pages.Index1Model
 @{
     ViewData["Title"] = "Time and Date";
@@ -6,5 +8,16 @@
 <div class="result">
     <h2 id="date-page"></h2>
     <h2 id="time-page"></h2>
+    <h2>@DateAndTime.Now.ToLongDateString()</h2>
+    <h2 >@DateAndTime.Now.ToLongTimeString()</h2>
 </div>
 
+@functions
+{
+    //public static void t(object obj)
+    //{
+    //    DateAndTime.Now.ToLongTimeString();
+    //} 
+    //static TimerCallback  tc = new TimerCallback(t);
+    //Timer timer = new Timer(tc, null, 0, 1000);
+}
