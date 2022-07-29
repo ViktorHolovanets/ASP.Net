@@ -1,0 +1,15 @@
+﻿@page
+@model Pr.Pages.CountriesModel
+@{
+}
+<div>
+    @foreach (var r in @Model.countries)
+    {
+        <div class="country">
+            <p class="CountryName">@r.Name</p>
+            <p class="CountryCapital">@r.Capital</p>
+            <p class="CountryArea">@r.Area</p>
+        </div>
+        
+    }
+</div>

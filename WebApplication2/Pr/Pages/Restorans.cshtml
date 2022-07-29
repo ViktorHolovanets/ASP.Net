@@ -1,0 +1,10 @@
+﻿@page
+@model Pr.Pages.RestoransModel
+@{
+}
+<ul>
+    @foreach (var r in @Model.restorans)
+    {
+        <li><a href="/ReastaranInfo?name=@r.Name&type=@r.Type&n=@r.Number_of_Seats">@r.Name</a></li>
+    }
+</ul>
