@@ -4,6 +4,15 @@
 @model WebApplication2.Pages.Index1Model
 @{
     ViewData["Title"] = "Time and Date";
+    //string str=DateAndTime.Now.ToLongTimeString();
+    // void t(object obj)
+    // {
+    //     str = DateAndTime.Now.ToLongTimeString();
+    //     <text>@str</text><br/>
+        
+    //} 
+    //TimerCallback  tc = new TimerCallback(t);
+    //Timer timer = new Timer(tc, null, 0, 1000);
 }
 <div class="result">
     <h2 id="date-page"></h2>
@@ -12,12 +21,3 @@
     <h2 >@DateAndTime.Now.ToLongTimeString()</h2>
 </div>
 
-@functions
-{
-    //public static void t(object obj)
-    //{
-    //    DateAndTime.Now.ToLongTimeString();
-    //} 
-    //static TimerCallback  tc = new TimerCallback(t);
-    //Timer timer = new Timer(tc, null, 0, 1000);
-}
