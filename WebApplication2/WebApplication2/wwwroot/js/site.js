@@ -10,7 +10,6 @@ $(() => {
         if (time == '00:00:00')
             $('#date-page').html(`Date:${new Date().toLocaleDateString()}`);
         $('#time-page').html(`Time: ${time}`);
-
     },
         1000);
     $('#nextQuote').on('click',
