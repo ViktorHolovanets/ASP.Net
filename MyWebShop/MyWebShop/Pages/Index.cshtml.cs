@@ -16,7 +16,7 @@ namespace MyWebShop.Pages
             
         }
 
-        public void OnGet(User client)
+        public void OnPost(User client)
         {
             var cl = context.Users.FirstOrDefault(p => p.Login == client.Login && p.Password == client.Password);
             if (cl != null)
