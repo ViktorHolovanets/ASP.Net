@@ -13,7 +13,7 @@ namespace MyWebShop.Pages
         public IndexModel(ShopDB db)
         {
             context = db;
-            
+           
         }
 
         public void OnPost(User client)
@@ -29,7 +29,15 @@ namespace MyWebShop.Pages
                 context.Users.Add(client);
                 context.SaveChanges();
             }
-            
+            Response.Cookies.Append("id", Client.Id.ToString());
+        }
+
+        public void OnGet()
+        {
+            if (Request.Cookies.ContainsKey("id"))
+            {
+                Client = context.Users.FirstOrDefault(p => p.Id == Int32.Parse(Request.Cookies["id"]));
+            }
         }
     }
 }
