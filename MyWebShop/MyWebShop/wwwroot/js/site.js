@@ -16,3 +16,6 @@ $('button.user').on('click', function() {
 //$('button.exit').on('click', function () {
 //    document.cookie = "id=''";
 //})
+$('#sort input').on('change', function () {
+    $('#sort').submit();
+})

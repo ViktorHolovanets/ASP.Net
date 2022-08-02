@@ -1,16 +1,28 @@
-﻿@page
+﻿@page "{handler?}"
 @model MyWebShop.Pages.ShowCategoriesModel
-<div class="content">
-    @foreach (var p in @Model.GetCategory())
-    {
-        <div class="product">
-            <img src="@p.Image"/>
-            <p class="nameProduct">@p.Name</p>
-            <p class="priceProduct">@p.Price ₴</p>
-            <form action="/Details">
-                <input type="hidden" name="id" value="@p.Id"/>
-                <input type="submit" value="Details" class="addBasket"/>
-            </form>
-        </div>
-    }
+<div>
+    <div class="sort">
+        <form method="get" id="sort">
+            <label>Від дешевих</label>
+            <input type="radio" name="handler" value="OrderBy"/>
+            <label>Від дорогих</label>
+            <input type="radio" name="handler" value="OrderByDescending"/>
+            <input type="hidden" name="category" value="@Model.TypeCategory"/>
+        </form>
+    </div>
+    <div class="content">
+        @foreach (var p in @Model.Products?? @Model.GetCategory())
+        {
+            <div class="product">
+                <img src="@p.Image"/>
+                <p class="nameProduct">@p.Name</p>
+                <p class="priceProduct">@p.Price ₴</p>
+                <form action="/Details">
+                    <input type="hidden" name="id" value="@p.Id"/>
+                    <input type="submit" value="Details" class="addBasket"/>
+                </form>
+            </div>
+        }
+    </div>
 </div>
+
