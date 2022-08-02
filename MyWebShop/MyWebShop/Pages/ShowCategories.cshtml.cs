@@ -8,15 +8,16 @@ namespace MyWebShop.Pages
     public class ShowCategoriesModel : PageModel
     {
         ShopDB context;
-        [BindProperty(SupportsGet = true, Name = "category")]
-        public string TypeCategory { get; set; }
+        
 
         public List<Product> Products { get; set; } = null;
         public ShowCategoriesModel(ShopDB db)
         {
             context = db;
         }
-        
+        [BindProperty(SupportsGet = true, Name = "category")]
+        public string TypeCategory { get; set; }
+
         public  IEnumerable<Product> GetCategory()=> context.Products.Where(p => p.category.Name == TypeCategory).ToList();
 
         public void OnGetOrderByDescending()
