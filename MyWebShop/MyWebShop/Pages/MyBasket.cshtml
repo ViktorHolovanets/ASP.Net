@@ -1,0 +1,25 @@
+﻿@page
+@model MyWebShop.Pages.MyBasketModel
+<div class="content">
+    @if (@Model.ProductsBasket!=null)
+    {
+        @foreach (var p in @Model.ProductsBasket)
+        {
+            <div class="product">
+                <img src="@p.Image"/>
+                <p class="nameProduct">@p.Name</p>
+                <p class="priceProduct">@p.Price ₴</p>
+                <form method="post">
+                    <input type="hidden" name="id" value="@p.Id"/>
+                    <input type="image" src="Images/buy.png" class="btnNavigation">
+                    <input type="image" src="Images/return-purchase.png" class="btnNavigation">
+                </form>
+            </div>
+        }
+    }
+    else
+    {
+        <div>Zerro</div>
+    }
+   
+</div>

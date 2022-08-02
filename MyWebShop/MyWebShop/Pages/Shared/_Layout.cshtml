@@ -31,7 +31,6 @@
                         <a class="nav-link text-dark" asp-area="" asp-page="/About">About</a>
                     </li>
                     <li class="nav-item cat">
-                       
                         <form action="/ShowCategories" id="category">
                             <label for="category"> Categories product:</label>
                             <select name="category" id="select">
@@ -40,6 +39,11 @@
                                 <option value="Ноутбуки">Ноутбуки</option>
                                 <option value="Побутова техніка">Побутова техніка</option>
                             </select>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/MyBasket" method="get">
+                            <input type="image" src="Images/60756.png" id="myBasket">
                         </form>
                     </li>
                 </ul>

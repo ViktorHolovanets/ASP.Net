@@ -6,14 +6,11 @@ namespace MyWebShop.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
         ShopDB context;
         public User Client { get; set; } = null;
         public IndexModel(ShopDB db)
         {
             context = db;
-           
         }
 
         public void OnPost(User client)

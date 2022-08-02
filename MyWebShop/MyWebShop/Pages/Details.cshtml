@@ -1,0 +1,18 @@
+﻿@page
+@model MyWebShop.Pages.DetailsModel
+<div style="position: relative">
+    @if (Request.Cookies.ContainsKey("id"))
+    {
+        <form method="post">
+            <input type="hidden" value="@Request.Cookies["id"]" name="idClient"/>
+            <input type="hidden" value="@Model.Product.Id" name="idProduct"/>
+            <input type="image" src="Images/buy.png" id="addProduct" class="btnNavigation">
+        
+        </form>
+    }
+    <h2>@Model.Product.Name</h2>
+    <p class="price">Price: @Model.Product.Price ₴</p>
+    <img src="@Model.Product.Image"/>
+    <p>@Model.Product.Price</p>
+    <p>@Model.Product.Details</p>
+</div>

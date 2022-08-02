@@ -10,5 +10,6 @@ namespace MyWebShop.Entities.DB
         public int Price { get; set; }
         public string? Image { get; set; }
         public Category? category { get; set; }
+        public string? Details { get; set; }
     }
 }

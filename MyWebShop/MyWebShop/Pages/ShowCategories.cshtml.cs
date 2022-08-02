@@ -8,20 +8,20 @@ namespace MyWebShop.Pages
     public class ShowCategoriesModel : PageModel
     {
         ShopDB context;
-        public string TypeCategory { get; private set; }
+        [BindProperty(SupportsGet = true, Name = "category")]
+        public string TypeCategory { get; set; }
+        public int Id { get; set; }
         public ShowCategoriesModel(ShopDB db)
         {
             context = db;
         }
-        public void OnGet(string category)
+        public void OnGet( int id)
         {
-            TypeCategory = category;
+            Id = id;
+            // TypeCategory = category;
         }
 
-        public IEnumerable<Product> GetCategory()
-        {
-            var r = context.Products.Where(p => p.category.Name == TypeCategory).ToList();
-            return r;
-        }
+        public IEnumerable<Product> GetCategory()=> context.Products.Where(p => p.category.Name == TypeCategory).ToList();
+
     }
 }
