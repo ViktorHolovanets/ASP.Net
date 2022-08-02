@@ -13,3 +13,6 @@ function closeModalWindow(event) {
 $('button.user').on('click', function() {
     $('#modal-window').fadeIn();
 })
+//$('button.exit').on('click', function () {
+//    document.cookie = "id=''";
+//})

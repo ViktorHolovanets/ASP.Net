@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{handler?}"
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -22,6 +22,11 @@
 else
 {
     <p class="user">@Model.Client.Login</p>
+    <form>
+        <input type="hidden" name="handler" value="Exit"/>
+        <input type="submit" class="exit" value="Exit"/>
+    </form>
+    
 }
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>

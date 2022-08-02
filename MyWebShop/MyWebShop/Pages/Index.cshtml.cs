@@ -36,5 +36,9 @@ namespace MyWebShop.Pages
                 Client = context.Users.FirstOrDefault(p => p.Id == Int32.Parse(Request.Cookies["id"]));
             }
         }
+        public void OnGetExit()
+        {
+            Response.Cookies.Delete("id");
+        }
     }
 }
