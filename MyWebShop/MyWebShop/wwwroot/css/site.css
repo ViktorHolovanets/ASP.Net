@@ -138,3 +138,6 @@ img {
 #sort>input {
     visibility: hidden;
 }
+#show_filter {
+    background-color: deepskyblue;
+}
