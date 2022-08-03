@@ -48,16 +48,7 @@ namespace MyWebShop.Pages
         public void OnGetOrderBy()
         {
             TypeSort ??= TypeSort2;
-            switch (TypeSort)
-            {
-                case "name":
-                    Products = GetCategory().OrderBy(p => p.Name).ToList();
-                    break;
-                case "price":
-                    Products = GetCategory().OrderBy(p => p.Price).ToList();
-                    break;
-                default: break;
-            }
+            Products = GetCategory().ToList();
         }
     }
 }
