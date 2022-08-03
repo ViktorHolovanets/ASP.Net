@@ -2,24 +2,36 @@
 @model MyWebShop.Pages.ShowCategoriesModel
 <div>
     <div class="sort">
-        <form method="get" id="sort">
-            <label>Від дешевих</label>
-            <input type="radio" name="handler" value="OrderBy" />
-            <label>Від дорогих</label>
-            <input type="radio" name="handler" value="OrderByDescending"/>
-            <input type="hidden" name="category" value="@Model.TypeCategory"/>
+        <form method="get" id="sort" action="\ShowCategories">
+            <input type="radio" name="handler" value="OrderBy" id="order_by" />
+            <input type="radio" name="handler" value="OrderByDescending" id="order_by_descending" />
+            <label for="order_by" class="btn">˄</label>
+            <label for="order_by_descending" class="btn">˅</label>
+            <input type="hidden" name="category" value="@Model.TypeCategory" />
+            <input type="hidden" name="typesort2" value="@Model.TypeSort"/>
+            <label id="show_filter">Filter</label>
+            <div id="modal-window">
+                <div id="details">
+                    <a href="#" id="close" onclick="closeModalWindow(event)">❌</a>
+                    <label>Sort: </label><br/>
+                    <input type="radio" name="typesort" value="name"/>
+                    <label>Name </label><br/>
+                    <input type="radio" name="typesort" value="price"/>
+                    <label>Price </label><br/>
+                </div>
+            </div>
         </form>
     </div>
     <div class="content">
-        @foreach (var p in @Model.Products?? @Model.GetCategory())
+        @foreach (var p in @Model.Products ?? @Model.GetCategory())
         {
             <div class="product">
-                <img src="@p.Image"/>
+                <img src="@p.Image" />
                 <p class="nameProduct">@p.Name</p>
                 <p class="priceProduct">@p.Price ₴</p>
                 <form action="/Details">
-                    <input type="hidden" name="id" value="@p.Id"/>
-                    <input type="submit" value="Details" class="addBasket"/>
+                    <input type="hidden" name="id" value="@p.Id" />
+                    <input type="submit" value="Details" class="addBasket" />
                 </form>
             </div>
         }

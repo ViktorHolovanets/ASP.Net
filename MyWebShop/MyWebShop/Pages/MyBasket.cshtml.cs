@@ -26,8 +26,13 @@ namespace MyWebShop.Pages
 
         public void OnPost(int id)
         {
-            context.Baskets.Remove(context.Baskets.FirstOrDefault(p => p.Products_id.Id == id&& p.User_id.Id == Int32.Parse(Request.Cookies["id"])));
-            context.SaveChanges();
+            var t = context.Baskets.FirstOrDefault(p =>
+                p.Products_id.Id == id && p.User_id.Id == Int32.Parse(Request.Cookies["id"]));
+            if (t != null)
+            {
+                context.Baskets.Remove(t);
+                context.SaveChanges();
+            }
             ProductsBasket = (from p in context.Baskets
                               where p.User_id.Id == Int32.Parse(Request.Cookies["id"])
                               orderby p

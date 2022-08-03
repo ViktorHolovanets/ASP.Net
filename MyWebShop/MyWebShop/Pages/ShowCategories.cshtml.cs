@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -17,16 +18,46 @@ namespace MyWebShop.Pages
         }
         [BindProperty(SupportsGet = true, Name = "category")]
         public string TypeCategory { get; set; }
-
-        public  IEnumerable<Product> GetCategory()=> context.Products.Where(p => p.category.Name == TypeCategory).ToList();
+        [BindProperty(SupportsGet = true, Name = "typesort")]
+        public string TypeSort { get; set; }
+        [BindProperty(SupportsGet = true, Name = "typesort2")]
+        public string TypeSort2 { get; set; }
+        public IEnumerable<Product> GetCategory() => TypeSort switch
+        {
+            "name" => context.Products.Where(p => p.category.Name == TypeCategory).ToList().OrderBy(p => p.Name),
+            "price" => context.Products.Where(p => p.category.Name == TypeCategory).ToList().OrderBy(p => p.Price),
+            _ => context.Products.Where(p => p.category.Name == TypeCategory).ToList()
+        };
+            
 
         public void OnGetOrderByDescending()
         {
-            Products = GetCategory().OrderByDescending(p => p.Price).ToList();
+            TypeSort ??= TypeSort2;
+            switch (TypeSort)
+            {
+                case "name":
+                    Products = GetCategory().OrderByDescending(p => p.Name).ToList();
+                    break;
+                case "price":
+                    Products = GetCategory().OrderByDescending(p => p.Price).ToList();
+                    break;
+                default:break;
+            }
+            //Products = GetCategory().OrderByDescending(p => p.Price).ToList();
         }
         public void OnGetOrderBy()
         {
-            Products = GetCategory().OrderBy(p => p.Price).ToList();
+            TypeSort ??= TypeSort2;
+            switch (TypeSort)
+            {
+                case "name":
+                    Products = GetCategory().OrderBy(p => p.Name).ToList();
+                    break;
+                case "price":
+                    Products = GetCategory().OrderBy(p => p.Price).ToList();
+                    break;
+                default: break;
+            }
         }
     }
 }

@@ -45,7 +45,7 @@ img {
     text-align: right;
     flex-grow: 1;
 }
-.addBasket {
+.addBasket, .btn {
     background-color: forestgreen;
     color: white;
     text-align: center;
@@ -134,4 +134,7 @@ img {
     border-radius: 2px;
     padding: 5px;
     margin: 15px;
+}
+#sort>input {
+    visibility: hidden;
 }

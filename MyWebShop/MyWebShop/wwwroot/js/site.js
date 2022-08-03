@@ -19,3 +19,6 @@ $('button.user').on('click', function() {
 $('#sort input').on('change', function () {
     $('#sort').submit();
 })
+$('#show_filter').on('click', function() {
+    $('#modal-window').fadeIn();
+})
