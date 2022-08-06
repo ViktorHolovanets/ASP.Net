@@ -1,3 +1,26 @@
 ﻿@page "{id:int}"
 @model MyWebShop.Pages.EditProductModel
+<div class="content">
+    <div class="view-edit">
+        <form method="post">
+            <input type="hidden" value="@Model.ProductId.Id" name="id"/><br/>
+            <label for="name">Name</label><br/>
+            <input type="text" value="@Model.ProductId.Name" name="name" id="edit-name"/><br/>
+            <label for="price">Price</label><br/>
+            <input type="number" value="@Model.ProductId.Price" name="price" id="edit-price"/><br/>
+            <label for="details">Details</label><br/>
+            <textarea name="details" id="edit-details">@Model.ProductId.Details</textarea><br/>
+            <label for="image">Url image</label><br/>
+            <input type="text" value="@Model.ProductId.Image" name="image" id="edit-image"/><br/>
+            <input type="submit" value="Save" />
+        </form>
+    </div>
+    <div class="view-result">
+        <h2 id="view-name">@Model.ProductId.Name</h2>
+        <p class="price" id="view-price">Price: @Model.ProductId.Price ₴</p>
+        <img src="@Model.ProductId.Image" id="view-image"/>
+        <p id="view-details">@Model.ProductId.Details</p>
+    </div>
+</div>
+
 

@@ -13,12 +13,21 @@ function closeModalWindow(event) {
 $('button.user').on('click', function() {
     $('#modal-window').fadeIn();
 })
-//$('button.exit').on('click', function () {
-//    document.cookie = "id=''";
-//})
 $('#sort input').on('change', function () {
     $('#sort').submit();
 })
 $('#show_filter').on('click', function() {
     $('#modal-window').fadeIn();
+})
+$('#edit-name').on('input',function() {
+    $('#view-name').html($(this).val());
+})
+$('#edit-price').on('input', function () {
+    $('#view-price').html($(this).val());
+})
+$('#edit-details').on('input', function () {
+    $('#view-details').html($(this).val());
+})
+$('#edit-image').on('focusout', function () {
+    $('#view-image').attr('src',$(this).val());
 })

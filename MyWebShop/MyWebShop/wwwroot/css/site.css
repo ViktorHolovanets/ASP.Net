@@ -24,7 +24,7 @@ body {
 }
 .content {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
 }
 .product {
     width: 250px;
@@ -145,4 +145,11 @@ img {
 }
 .hl {
     padding: 3px 15px;
+}
+.view-edit * {
+    min-width: 350px;
+    margin: 5px;
+}
+.view-edit textarea {
+    min-height: 150px;
 }

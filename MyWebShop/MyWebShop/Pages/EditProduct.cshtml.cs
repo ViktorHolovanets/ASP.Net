@@ -19,5 +19,11 @@ namespace MyWebShop.Pages
             if (ProductId == null) return NotFound();
             return Page();
         }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            context.Products.Update(ProductId!);
+            await context.SaveChangesAsync();
+            return RedirectToPage("Index");
+        }
     }
 }
