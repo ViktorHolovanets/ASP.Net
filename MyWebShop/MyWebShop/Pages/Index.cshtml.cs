@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyWebShop.Entities.DB;
+using MyWebShop.Lib;
 
 namespace MyWebShop.Pages
 {
@@ -11,6 +12,10 @@ namespace MyWebShop.Pages
         public IndexModel(ShopDB db)
         {
             context = db;
+            if (context.Categories.Count() == 0)
+            {
+                MyFunction.CreateBb(context);
+            }
         }
 
         public void OnPost(User client)

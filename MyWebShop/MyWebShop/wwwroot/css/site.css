@@ -51,6 +51,8 @@ img {
     text-align: center;
     border: none;
     border-radius: 3px;
+    text-decoration: none;
+    min-width: 75px
 }
 .user {
     position: absolute;
@@ -140,4 +142,7 @@ img {
 }
 #show_filter {
     background-color: deepskyblue;
+}
+.hl {
+    padding: 3px 15px;
 }

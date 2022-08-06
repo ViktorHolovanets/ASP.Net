@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-string connection= MyFunction.StringConnection("Entities\\DB\\razorpagesdb.mdf");
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ShopDB>(options => options.UseSqlServer(connection));
 
