@@ -1,0 +1,18 @@
+﻿@page
+@using System.Collections
+@using Library
+@model MyCinema.Pages.CreateScheduleModel
+@{
+    IEnumerable<Film> films = Model.context.Films.ToList();
+}
+<form method="post">
+    <input type="date" asp-for="Schedule.Date"/>
+    <input type="time" asp-for="Schedule.Time"/>
+    <select asp-for="film_id">
+        @foreach (Film f in Model.context.Films)
+        {
+            <option value="@f.Id">@f.Title, @f.Released</option>
+        }
+    </select>
+    <input type="submit"/>
+</form>

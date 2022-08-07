@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLibraryBooks", "MyLibraryBooks\MyLibraryBooks.csproj", "{8B4AF4E1-3D8C-48F3-9854-CBB937ADFA47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "LibraryDB\Library.csproj", "{21239D03-7F92-47BC-B6A1-BEF773E49B4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "LibraryDB\Library.csproj", "{21239D03-7F92-47BC-B6A1-BEF773E49B4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCinema", "MyCinema\MyCinema.csproj", "{256A28DD-8D67-4131-8181-04B41FB96423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{21239D03-7F92-47BC-B6A1-BEF773E49B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21239D03-7F92-47BC-B6A1-BEF773E49B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21239D03-7F92-47BC-B6A1-BEF773E49B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256A28DD-8D67-4131-8181-04B41FB96423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256A28DD-8D67-4131-8181-04B41FB96423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256A28DD-8D67-4131-8181-04B41FB96423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256A28DD-8D67-4131-8181-04B41FB96423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
