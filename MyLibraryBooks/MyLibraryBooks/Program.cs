@@ -1,5 +1,5 @@
+using Library;
 using Microsoft.EntityFrameworkCore;
-using MyWebShop.Entities.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +8,7 @@ builder.Services.AddRazorPages();
 
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ShopDB>(options => options.UseSqlServer(connection));
-
+builder.Services.AddDbContext<LibraryDB>(options => options.UseSqlServer(connection));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,15 @@
+﻿@page
+@using Library
+@model MyLibraryBooks.Pages.MyLibraryModel
+@{
+}
+<div class="books">
+    @foreach (var b in Model.context.Books)
+    {
+        <div class="book">
+            <p class="book-title">@b.Title</p>
+            <p class="book-author">@b.Authors</p>
+            <div class="book-cover"><img  src="@b.Image"></div>
+        </div>
+    }
+</div>

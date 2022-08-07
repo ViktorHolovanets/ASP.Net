@@ -1,0 +1,81 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.books{
+    display: flex;
+    flex-flow: row wrap;
+}
+.book {
+    border: 1px solid forestgreen;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 5px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-flow: column nowrap;
+}
+.book-title {
+    font-size: 1.1rem;
+    font-family: cursive;
+}
+.book-cover {
+    flex-grow: 1;
+}
+.add-book {
+    border: none;
+    border-radius: 25%;
+    background-color: forestgreen;
+    color: white;
+    margin: 5px;
+    font-weight: bold;
+}
+#covers {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+#covers>*{
+    margin: 15px;
+}
+#add-mylibrary {
+    position: sticky;
+    font-size: 1.5em;
+    top: 50px;
+    text-align: right;
+}
+.load {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+}
+.header-details {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    font-size: 1.5rem;
+}
+.header-details a {
+    text-decoration: none;
+}
+.main-details {
+    background-color: darkgrey;
+}

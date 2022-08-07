@@ -1,0 +1,57 @@
+﻿@page
+@model MyLibraryBooks.Pages.DetailsBookModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MyLibraryBooks</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MyLibraryBooks.styles.css" asp-append-version="true" />
+</head>
+<body>
+<main class="main-details">
+    <header class="header-details">
+        <label>
+
+            <a asp-page="Index">👈</a>
+            Back
+        </label>
+        <label>
+            My Library
+            <a asp-page="MyLibrary">👉</a>
+        </label>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <img src="ZZ5H.gif" alt="" class="load">
+            <form method="post" id="add-mylibrary" asp-antiforgery="true">
+                <input type="hidden" asp-for="book.Title" />
+                <input type="hidden" asp-for="book.Authors" />
+                <input type="hidden" asp-for="book.Key" id="key-book" />
+                <input type="hidden" asp-for="book.Year" />
+                <input type="hidden" asp-for="book.Image" id="img" />
+                <input type="submit" value="+" title="Add my library" asp-page-handler="AddBook" class="add-book" />
+            </form>
+            <div id="details-book">
+                <h2>Title: @Model.book.Title</h2>
+                <p>Authors:@Model.book.Authors</p>
+                <p>First publish year: @Model.book.Year</p>
+                <div id="covers"></div>
+                <p id="details"></p>
+            </div>
+        </main>
+    </div>
+</main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+</body>
+</html>

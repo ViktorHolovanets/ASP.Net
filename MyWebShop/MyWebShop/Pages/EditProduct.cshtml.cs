@@ -23,7 +23,7 @@ namespace MyWebShop.Pages
         {
             context.Products.Update(ProductId!);
             await context.SaveChangesAsync();
-            return RedirectToPage("Index");
+            return Page()/*RedirectToPage("Index")*/;
         }
     }
 }
