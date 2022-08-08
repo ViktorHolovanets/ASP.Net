@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyLibraryBooks", "MyLibrary
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "LibraryDB\Library.csproj", "{21239D03-7F92-47BC-B6A1-BEF773E49B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCinema", "MyCinema\MyCinema.csproj", "{256A28DD-8D67-4131-8181-04B41FB96423}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCinema", "MyCinema\MyCinema.csproj", "{256A28DD-8D67-4131-8181-04B41FB96423}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

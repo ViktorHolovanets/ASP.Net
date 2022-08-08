@@ -5,14 +5,14 @@
 @{
     IEnumerable<Film> films = Model.context.Films.ToList();
 }
-<form method="post">
-    <input type="date" asp-for="Schedule.Date"/>
-    <input type="time" asp-for="Schedule.Time"/>
-    <select asp-for="film_id">
+<form method="post" id="form-schedule">
+    <input type="date" asp-for="Schedule.Date"/><br/>
+    <input type="time" asp-for="Schedule.Time"/><br/>
+    <select asp-for="film_id"><br/>
         @foreach (Film f in Model.context.Films)
         {
             <option value="@f.Id">@f.Title, @f.Released</option>
         }
     </select>
-    <input type="submit"/>
+    <br/><input type="submit"/><br/>
 </form>

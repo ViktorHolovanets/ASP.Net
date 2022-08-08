@@ -1,10 +1,90 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    var d = DateTime.Today.ToString("yyyy-MM-dd");
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>My Cinema.</p>
+</div>
+<div id="modal-window">
+    <div id="details">
+        <div class="load"></div>
+        <a href="#" id="close">❌</a>
+        <img src="" alt="" id="poster">
+        <table>
+            <tr>
+                <th>Title:</th>
+                <td id="titli"></td>
+            </tr>
+            <tr>
+                <th>Released</th>
+                <td id="released"></td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td id="genre"></td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td id="country"></td>
+            </tr>
+            <tr>
+                <th>Director</th>
+                <td id="director"></td>
+            </tr>
+            <tr>
+                <th>Writer</th>
+                <td id="writer"></td>
+            </tr>
+            <tr>
+                <th>Actors</th>
+                <td id="actors"></td>
+            </tr>
+            <tr>
+                <th>Award</th>
+                <td id="award"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div id="films">
+    @if (Model.ScheduleToday.Count() == 0)
+    {
+        <h2>There are no sessions today</h2>
+    }
+    else
+    {
+        @foreach (Film f in Model.context.Films)
+        {
+            if (Model.GetFilm(f).Count() != 0)
+            {
+                <div class="infofilm">
+                    <div class="film">
+                        <img src="@f.Poster" alt="Poster">
+                        <p>@f.Title</p>
+                        <p class="year">@f.Released</p>
+                        <button class="select-film-details">Details</button>
+                        <input type="hidden" class="select_film_poster" value="@f.Poster"/>
+                        <input type="hidden" class="select_film_title" value="@f.Title"/>
+                        <input type="hidden" class="select_film_released" value="@f.Released"/>
+                        <input type="hidden" class="select_film_genre" value="@f.Genre"/>
+                        <input type="hidden" class="select_film_country" value="@f.Country"/>
+                        <input type="hidden" class="select_film_director" value="@f.Director"/>
+                        <input type="hidden" class="select_film_writer" value="@f.Writer"/>
+                        <input type="hidden" class="select_film_actors" value="@f.Actors"/>
+                        <input type="hidden" class="select_film_awards" value="@f.Awards"/>
+                    </div>
+                    <div class="schedule">
+                        <h3>Time:</h3>
+                        @foreach (var s in Model.GetFilm(f))
+                        {
+                            <p>@s.Time</p>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
 </div>

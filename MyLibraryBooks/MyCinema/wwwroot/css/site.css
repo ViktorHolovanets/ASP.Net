@@ -16,3 +16,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+.infofilm {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 15px;
+}
+.schedule {
+    text-align: center;
+    padding: 10px
+}
+.infofilm {
+    border: 2px solid chocolate;
+    border-radius: 5px;
+    padding: 5px;
+}
+#form-schedule {
+    padding: 5px;
+}
+#form-schedule>input{
+    width: 400px;
+    margin: 15px;
+}
