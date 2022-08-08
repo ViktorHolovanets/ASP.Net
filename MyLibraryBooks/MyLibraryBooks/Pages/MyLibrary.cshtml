@@ -3,13 +3,51 @@
 @model MyLibraryBooks.Pages.MyLibraryModel
 @{
 }
+<form id="search" method="post">
+    <input type="text" name="word" placeholder="Search..."/>
+    <input type="submit" value="🔎"  asp-page-handler="Search"/>
+</form>
+@if (Model.book != null)
+{
+    <div id="modal-window">
+        <div id="detail">
+            <a href="#" id="close">❌</a>
+            <form method="post">
+                <label>Title:</label><br/>
+                <input type="text" asp-for="book.Title"/><br/>
+                <label>Authors:</label><br/>
+                <input type="text" asp-for="book.Authors"/><br/>
+                <label>Year:</label><br/>
+                <input type="text" asp-for="book.Year"/><br/>
+                <label>Image:</label><br/>
+                <input type="text" asp-for="book.Image"/><br/>
+                <input type="hidden" asp-for="book.Key"/><br/>
+                <input type="hidden" asp-for="book.Id"/><br/>
+                <input type="submit" value="Ok" asp-page-handler="Edits"/><br/>
+            </form>
+        </div>
+    </div>
+}
 <div class="books">
-    @foreach (var b in Model.context.Books)
+    @foreach (var b in Model.books??Model.context.Books)
     {
         <div class="book">
             <p class="book-title">@b.Title</p>
             <p class="book-author">@b.Authors</p>
             <div class="book-cover"><img  src="@b.Image"></div>
+            <form method="post">
+                <input type="hidden" name="id"  value="@b.Id" />
+                <input type="submit" value="Edit" asp-page-handler="Edit"/>
+                <input type="button" class="myAlert" value="Delete" />
+                <div class="modal">
+                    <div class="det">
+                        <h2>Delete?</h2>
+                        <input type="button" value="No" class="noDelete"/>
+                        <input type="submit" value="Yes" asp-page-handler="Delete"/>
+                    </div>
+                </div>
+            </form>
+            
         </div>
     }
 </div>

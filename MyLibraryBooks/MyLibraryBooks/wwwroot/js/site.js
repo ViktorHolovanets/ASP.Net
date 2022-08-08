@@ -28,13 +28,13 @@ $(() => {
                 console.log(bookInfo);
                 if (bookInfo.author_name) {
                     if (bookInfo.author_name.length == 1) {
-                        var authorsInfo = `Author: <a href="https://openlibrary.org/${bookInfo.author_key[0]}/">${bookInfo.author_name[0]}</a>`;
+                        var authorsInfo = `Author: <a href="https://openlibrary.org/autors/${bookInfo.author_key[0]}/">${bookInfo.author_name[0]}</a>`;
                         authors += bookInfo.author_name[0];
                     }
                     else {
                         var authorsInfo = 'Authors: ';
                         $.each(bookInfo.author_name, function (i, author) {
-                            authorsInfo += `<a href="https://openlibrary.org/${bookInfo.author_key[i]}/">${author}</a>, `;
+                            authorsInfo += `<a href="https://openlibrary.org/autors/${bookInfo.author_key[i]}/">${author}</a>, `;
                             authors += author + ', ';
                         });
                         authorsInfo = authorsInfo.slice(0, -2);
@@ -89,4 +89,17 @@ $(() => {
             console.log(data.description);
         });
     }
-})
+});
+$('#close').on('click',
+    function () {
+        $('#modal-window').fadeOut();
+        return false;
+    });
+$('.myAlert').on('click',
+    function () {
+        $('div.modal').fadeIn();
+    });
+$('.noDelete').on('click',
+    function () {
+        $('div.modal').fadeOut();
+    });
