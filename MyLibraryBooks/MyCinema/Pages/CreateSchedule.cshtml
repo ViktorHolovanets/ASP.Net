@@ -1,13 +1,14 @@
 ﻿@page
 @using System.Collections
+@using System.Runtime.Serialization
 @using Library
 @model MyCinema.Pages.CreateScheduleModel
 @{
     IEnumerable<Film> films = Model.context.Films.ToList();
 }
 <form method="post" id="form-schedule">
-    <input type="date" asp-for="Schedule.Date"/><br/>
-    <input type="time" asp-for="Schedule.Time"/><br/>
+    <input type="date"  asp-for="Schedule.Date" value="@DateTime.Now.ToString("yyyy-MM-dd")"/><br/>
+    <input type="time" asp-for="Schedule.Time" value="@DateTime.Now.ToShortTimeString()"/><br/>
     <select asp-for="film_id"><br/>
         @foreach (Film f in Model.context.Films)
         {

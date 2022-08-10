@@ -15,47 +15,49 @@
     <link rel="stylesheet" href="~/MyCinema.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <main>
-        <div id="modal-window">
-            <div id="details">
-                <div class="load"></div>
-                <a href="#" id="close" onclick="closeModalWindow(event)">❌</a>
-                <form method="post">
-                    <input type="hidden" name="poster" id="film-poster"/> 
-                    <input type="hidden" name="title" id="film-title"/>
-                    <input type="hidden" name="released" id="film-released"/>
-                    <input type="hidden" name="genre" id="film-genre"/>
-                    <input type="hidden" name="country" id="film-country"/>
-                    <input type="hidden" name="director" id="film-director"/>
-                    <input type="hidden" name="writer" id="film-writer"/>
-                    <input type="hidden" name="actors" id="film-actors"/>
-                    <input type="hidden" name="awards" id="film-award"/>
-                    <input type="submit" value="add DB" asp-page-handler="add" id="addFilm"/>
-                </form>
-            </div>
+<main>
+    <div id="home"><a asp-area="" asp-page="/Index">Home</a></div>
+   
+    <div id="modal-window">
+        <div id="details">
+            <div class="load"></div>
+            <a href="#" id="close" onclick="closeModalWindow(event)">❌</a>
+            <form method="post">
+                <input type="hidden" name="poster" id="film-poster"/>
+                <input type="hidden" name="title" id="film-title"/>
+                <input type="hidden" name="released" id="film-released"/>
+                <input type="hidden" name="genre" id="film-genre"/>
+                <input type="hidden" name="country" id="film-country"/>
+                <input type="hidden" name="director" id="film-director"/>
+                <input type="hidden" name="writer" id="film-writer"/>
+                <input type="hidden" name="actors" id="film-actors"/>
+                <input type="hidden" name="awards" id="film-award"/>
+                <input type="submit" value="add DB" asp-page-handler="add" id="addFilm"/>
+            </form>
         </div>
-        <h2>Search</h2>
-        <input type="text" name="API_key" id="API_key" placeholder="API key">
-        <div class="movie-search">
-            <b>Title:</b>
-            <input type="text" name="title" id="title">
-            <br>
-            <b>Type:</b>
-            <select name="type" id="type">
-                <option value="movie">Movie</option>
-                <option value="series">Series</option>
-                <option value="episode">Episode</option>
-            </select>
-            <br>
-            <input type="button" value="Search" id="search">
-        </div>
-        <div id="result">
-            <h2>Films</h2>
-            <img src="ZZ5H.gif" alt="" class="load">
-            <div id="films"></div>
-            <input type="button" value="More" id="moreFilms">
-        </div>
-    </main>
+    </div>
+    <h2>Search</h2>
+    <input type="text" name="API_key" id="API_key" placeholder="API key">
+    <div class="movie-search">
+        <b>Title:</b>
+        <input type="text" name="title" id="title">
+        <br>
+        <b>Type:</b>
+        <select name="type" id="type">
+            <option value="movie">Movie</option>
+            <option value="series">Series</option>
+            <option value="episode">Episode</option>
+        </select>
+        <br>
+        <input type="button" value="Search" id="search">
+    </div>
+    <div id="result">
+        <h2>Films</h2>
+        <img src="ZZ5H.gif" alt="" class="load">
+        <div id="films"></div>
+        <input type="button" value="More" id="moreFilms">
+    </div>
+</main>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

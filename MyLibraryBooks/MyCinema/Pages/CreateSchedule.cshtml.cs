@@ -8,8 +8,9 @@ namespace MyCinema.Pages
     public class CreateScheduleModel : PageModel
     {
         public LibraryDB context { get; private set; }
-        [BindProperty]
-        public Schedule Schedule { get; set; }
+
+        [BindProperty] public Schedule Schedule { get; set; }
+            
         [BindProperty]
         public int film_id { get;set; }
         public CreateScheduleModel(LibraryDB db)

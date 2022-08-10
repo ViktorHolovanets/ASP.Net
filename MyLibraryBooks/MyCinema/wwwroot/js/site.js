@@ -22,4 +22,16 @@ $(() => {
             $('#modal-window').fadeOut();
             return false;
         });
+    $('.isDelete').on('click',
+        function () {
+            console.log($(this).next('div.delete-window'));
+            $(this).next('div.delete-window').fadeIn();
+            return false;
+        });
+    $('.no-delete').on('click',
+        function () {
+            $(this ).closest('div.delete-window').fadeOut();
+            return false;
+        });
+    
 })

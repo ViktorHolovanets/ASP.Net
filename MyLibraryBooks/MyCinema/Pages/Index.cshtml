@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model IndexModel
 @{
     var d = DateTime.Today.ToString("yyyy-MM-dd");
@@ -8,6 +8,10 @@
     <h1 class="display-4">Welcome</h1>
     <p>My Cinema.</p>
 </div>
+<form id="search" method="post">
+    <input type="text" name="word" id="fiel-search" placeholder="Search..."/>
+    <input type="submit" value="🔎"  asp-page-handler="Search"/>
+</form>
 <div id="modal-window">
     <div id="details">
         <div class="load"></div>
@@ -61,6 +65,17 @@
             if (Model.GetFilm(f).Count() != 0)
             {
                 <div class="infofilm">
+                    <form method="post" class="form-delete">
+                        <input type="hidden" name="id" value="@f.Id"/>
+                        <input type="button" class="isDelete" value="🗑️"/>
+                        <div class="delete-window">
+                            <div class="delete">
+                                <label class="message">Delete ?</label><br/>
+                                <input type="submit" class="messagebtn" value="Yes"/>
+                                <input type="button" class="no-delete messagebtn"  value="No"/>
+                            </div>
+                        </div>
+                    </form>
                     <div class="film">
                         <img src="@f.Poster" alt="Poster">
                         <p>@f.Title</p>
@@ -75,6 +90,7 @@
                         <input type="hidden" class="select_film_writer" value="@f.Writer"/>
                         <input type="hidden" class="select_film_actors" value="@f.Actors"/>
                         <input type="hidden" class="select_film_awards" value="@f.Awards"/>
+                        <a asp-page="EditFilm" asp-route-id="@f.Id">Edit</a>
                     </div>
                     <div class="schedule">
                         <h3>Time:</h3>

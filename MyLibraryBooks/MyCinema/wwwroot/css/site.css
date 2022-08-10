@@ -1,39 +1,112 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
 .infofilm {
     display: flex;
     flex-flow: row nowrap;
     margin: 15px;
 }
+
 .schedule {
     text-align: center;
     padding: 10px
 }
+
 .infofilm {
     border: 2px solid chocolate;
     border-radius: 5px;
     padding: 5px;
+    position: relative;
 }
+
 #form-schedule {
     padding: 5px;
 }
-#form-schedule>input{
-    width: 400px;
-    margin: 15px;
+
+    #form-schedule > * {
+        width: 400px;
+        margin: 15px;
+    }
+
+.film {
+    position: relative;
+}
+
+.delete {
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+ 
+    z-index: 99991;
+}
+.delete-window {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+    .delete-window:before {
+        content: '';
+        background: #000;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        z-index: 9999;
+    }
+
+.form-delete {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.isDelete {
+    position: relative;
+    top: 85%;
+    left: 40%;
+}
+.message {
+    color: red;
+    font-size: 16px;
+    font-weight: bold;
+}
+.messagebtn {
+    color:white;
+    background-color: aquamarine;
+    border-radius: 3px;
+    padding: 3px;
+    border: none;
+}
+#search>input[type='text'] {
+    border: none;
+    outline-style: none;
+    border-bottom: 2px solid aquamarine
 }
