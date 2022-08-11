@@ -4,7 +4,7 @@
     var d = DateTime.Today.ToString("yyyy-MM-dd");
 }
 
-<div class="text-center">
+<div class="text-center myheader">
     <h1 class="display-4">Welcome</h1>
     <p>My Cinema.</p>
 </div>
@@ -65,6 +65,7 @@
             if (Model.GetFilm(f).Count() != 0)
             {
                 <div class="infofilm">
+                    <div class="opacity-background"></div>
                     <form method="post" class="form-delete">
                         <input type="hidden" name="id" value="@f.Id"/>
                         <input type="button" class="isDelete" value="🗑️"/>
@@ -72,13 +73,13 @@
                             <div class="delete">
                                 <label class="message">Delete ?</label><br/>
                                 <input type="submit" class="messagebtn" value="Yes"/>
-                                <input type="button" class="no-delete messagebtn"  value="No"/>
+                                <input type="button" class="no-delete messagebtn" value="No"/>
                             </div>
                         </div>
                     </form>
                     <div class="film">
                         <img src="@f.Poster" alt="Poster">
-                        <p>@f.Title</p>
+                        <p class="title">@f.Title</p>
                         <p class="year">@f.Released</p>
                         <button class="select-film-details">Details</button>
                         <input type="hidden" class="select_film_poster" value="@f.Poster"/>

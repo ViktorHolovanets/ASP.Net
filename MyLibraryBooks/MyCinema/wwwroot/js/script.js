@@ -6,7 +6,7 @@ $(() => {
             div.className = 'film';
             div.innerHTML = `
             <img src="${res[key].Poster}" alt="Poster">
-            <p>${res[key].Title}</p>
+            <p class="title-film">${res[key].Title}</p>
             <p class="year">${res[key].Year}</p>
             <button onclick="detailsFilm(event)">
                 Add BD

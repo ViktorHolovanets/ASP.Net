@@ -36,6 +36,7 @@ namespace MyCinema.Pages
         private IEnumerable<Schedule> GetTodayFilms()
         {
             string date = DateTime.Today.ToString("yyyy-MM-dd");
+
            return context.Schedules.Include(c => c.Film_id).Where(s => s.Date == date).ToList();
         }
         public void OnPostSearch(string word)
