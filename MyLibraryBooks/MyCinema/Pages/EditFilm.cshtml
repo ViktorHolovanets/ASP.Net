@@ -2,16 +2,25 @@
 @model MyCinema.Pages.EditFilmModel
 <div class="edit-film">
     <form method="post">
-        <input type="text" asp-for="film.Poster"/><br/>
-        <input type="text" asp-for="film.Title"/><br/>
-        <input type="text" asp-for="film.Released"/><br/>
-        <input type="text" asp-for="film.Genre"/><br/>
-        <input type="text" asp-for="film.Country"/><br/>
-        <input type="text" asp-for="film.Director"/><br/>
-        <input type="text" asp-for="film.Writer"/><br/>
-        <input type="text" asp-for="film.Actors"/><br/>
-        <input type="text" asp-for="film.Awards"/><br/>
-        <input type="hidden" asp-for="film.Id" /><br/>
+        <p>Poster:</p>
+        <input type="text" asp-for="film.Poster"/>
+        <p>Title:</p>
+        <input type="text" asp-for="film.Title"/>
+        <p>Released:</p>
+        <input type="text" asp-for="film.Released"/>
+        <p>Genre:</p>
+        <input type="text" asp-for="film.Genre"/>
+        <p>Country:</p>
+        <input type="text" asp-for="film.Country"/>
+        <p>Director:</p>
+        <input type="text" asp-for="film.Director"/>
+        <p>Writer:</p>
+        <input type="text" asp-for="film.Writer"/>
+        <p>Actors:</p>
+        <input type="text" asp-for="film.Actors"/>
+        <p>Awards:</p>
+        <input type="text" asp-for="film.Awards"/>
+        <input type="hidden" asp-for="film.Id"/><br/>
         <input type="submit" value="Ok" asp-page-handler="Ok"/>
         <input type="submit" value="Cancel" asp-page-handler="Cancel"/>
     </form>

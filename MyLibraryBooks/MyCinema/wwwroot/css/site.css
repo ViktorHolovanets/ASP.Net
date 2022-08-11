@@ -110,3 +110,24 @@ body {
     outline-style: none;
     border-bottom: 2px solid aquamarine
 }
+.edit-film input[type='text'] {
+    width: 400px;
+    margin: 5px;
+    border: none;
+    outline-color: gold;
+    border-bottom: 1px solid darkgreen;
+    
+}
+.edit-film p {
+    margin: 0;
+}
+.edit-film input[type='submit'] {
+    width: 150px;
+    margin: 5px;
+    border: none;
+    outline-color: aqua;
+    background-color: dodgerblue;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+}

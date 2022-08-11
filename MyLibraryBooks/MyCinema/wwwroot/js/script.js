@@ -45,7 +45,8 @@ class MovieService {
     search() {
         $.ajax({
             method: 'GET',
-            url: `https://www.omdbapi.com/?apikey=d87cdbca&s=${this._title}&type=${this._type}&page=${this._page}`,
+            url: `https://www.omdbapi.com/?apikey=${$('#API_key').val()}&s=${this._title}&type=${this._type}&page=${this._page}`,
+            /*d87cdbca*/
             statusCode: {
                 401: function () {
                     swal({
