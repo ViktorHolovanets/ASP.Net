@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyStart", "EmptyStart\EmptyStart.csproj", "{35DB43D2-F88E-443D-B272-5A7B265B490C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmptyStart", "EmptyStart\EmptyStart.csproj", "{35DB43D2-F88E-443D-B272-5A7B265B490C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySinoptik", "MySinoptik\MySinoptik.csproj", "{378BC795-0C79-481D-86C7-15D1B5613601}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{35DB43D2-F88E-443D-B272-5A7B265B490C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35DB43D2-F88E-443D-B272-5A7B265B490C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35DB43D2-F88E-443D-B272-5A7B265B490C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{378BC795-0C79-481D-86C7-15D1B5613601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{378BC795-0C79-481D-86C7-15D1B5613601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{378BC795-0C79-481D-86C7-15D1B5613601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{378BC795-0C79-481D-86C7-15D1B5613601}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
