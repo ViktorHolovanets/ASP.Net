@@ -20,14 +20,11 @@ btn.addEventListener('click', e => {
             alert(data.message)
         }
     });
-
-
 });
 function QueryUser(url, data) {
     fetch(url).then(function (response) {
-        response.json().then(data)
+        response.json().then(data);
     });
-
 }
 function CreateDivWeather(data) {
     let d = document.createElement('div');
