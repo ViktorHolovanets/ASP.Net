@@ -21,6 +21,7 @@ namespace EmptyStart.Lib
         {
             context.Response.ContentType = "text/html; charset=utf-8";
             var builder = new StringBuilder();
+            builder.Append("<a href=\" / \">Home</a>");
             string q = context.Request.Query["id"];
             if (!String.IsNullOrEmpty(q))
             {
@@ -28,6 +29,7 @@ namespace EmptyStart.Lib
                 {
                     var res = restorans.FirstOrDefault(r =>
                         r.Id == Int32.Parse(q));
+                    builder.Append("<br/><a href=\" /task3 \">Back</a>");
                     builder.Append($"<p>Name restoran: {res.Name}</p>");
                     builder.Append($"<p>Number of seats: {res.Number_of_Seats}</p>");
                     builder.Append($"<p>Type restoran: {res.Type}</p>");

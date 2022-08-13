@@ -9,7 +9,7 @@ namespace Pr.Pages
     {
         public List<Restoran> restorans = new List<Restoran>()
         {
-            new Restoran("name2", "type1", 15),
+            new Restoran("Restoran1", "type1", 15),
             new Restoran("name3", "type2", 15),
             new Restoran("name12323", "type3", 6),
             new Restoran("name12323", "type4", 7),
