@@ -20,8 +20,8 @@ body {
 }
 
 body * {
-        color: red;
-    }
+    color: red;
+}
 
 .center {
     display: flex;
