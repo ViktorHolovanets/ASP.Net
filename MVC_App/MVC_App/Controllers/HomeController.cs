@@ -13,10 +13,8 @@ namespace MVC_App.Controllers
             context = db;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Index() => View();
+        
         public IActionResult Task1()
         {
             ViewBag.SystemInformation = $"{Environment.OSVersion}";
@@ -93,6 +91,8 @@ namespace MVC_App.Controllers
             }
             return MyBasket();
         }
+        public IActionResult AboutMyShop() => View();
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
