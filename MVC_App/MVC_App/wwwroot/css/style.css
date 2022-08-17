@@ -1,0 +1,49 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: black;
+    overflow: hidden;
+}
+
+body * {
+        color: red;
+    }
+
+.center {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%)
+}
+
+.link {
+    color: white;
+    font-size: 24px;
+    letter-spacing: 3px;
+    margin: 35px;
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: rgb(30,10,25);
+}
+    .link:hover {
+        box-shadow: 0 0 10px aquamarine;
+    }

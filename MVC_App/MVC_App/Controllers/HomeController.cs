@@ -2,6 +2,7 @@
 using MVC_App.Models;
 using MVC_App.Models.DB;
 using System.Diagnostics;
+using MVC_App.Models.Lib;
 
 namespace MVC_App.Controllers
 {
@@ -11,6 +12,10 @@ namespace MVC_App.Controllers
         public HomeController(ShopDB db)
         {
             context = db;
+            if (context.Categories.Count() == 0)
+            {
+                MyFunc.CreateBb(context);
+            }
         }
 
         public IActionResult Index() => View();
