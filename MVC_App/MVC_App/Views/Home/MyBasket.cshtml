@@ -1,0 +1,35 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model IEnumerable<Product>
+<div class="content">
+    @if (@Model!=null)
+    {
+        @foreach (var p in Model)
+        {
+            <div class="product">
+                <img src="@p.Image"/>
+                <p class="nameProduct">@p.Name</p>
+                <p class="priceProduct">@p.Price ₴</p>
+                <form method="post">
+                    <input type="hidden" name="id" value="@p.Id"/>
+                    <input type="image" src="~/Images/buy.png" class="btnNavigation">
+                    <input type="image" src="~/Images/return-purchase.png" class="btnNavigation">
+                </form>
+            </div>
+        }
+    }
+    else
+    {
+        <div id="modal-window" style="display: block">
+            <div id="details">
+                <a href="#" id="close" onclick="closeModalWindow(event)">❌</a>
+                <form method="get" asp-controller="Home" asp-action="Task2">
+                    <h2>Пройдіть реєстрацію</h2>
+                    <input type="submit" value="Ok" class="btn"/>
+                </form>
+            </div>
+        </div>
+    }
+</div>

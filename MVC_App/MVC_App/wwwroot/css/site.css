@@ -1,0 +1,155 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+.logo {
+     width: 100%;
+}
+#select {
+    margin-top: 10px
+}
+.content {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.product {
+    width: 250px;
+    display: flex;
+    flex-flow: column wrap;
+    padding: 10px;
+    border: 1px solid green;
+    border-radius: 5px;
+    margin: 15px;
+}
+img {
+    box-sizing: border-box;
+    width: 100%;
+    flex-grow: 1;
+    justify-self: flex-start;
+}
+.cat {
+    text-align: right;
+    flex-grow: 1;
+}
+.addBasket, .btn {
+    background-color: forestgreen;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+    min-width: 75px
+}
+.user {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    background-color: white;
+    font-size: 25px;
+    z-index: 1;
+    border: none;
+    border-radius: 3px;
+    padding: 3px;
+}
+#modal-window {
+    display: none;
+}
+
+#modal-window:before {
+    content: '';
+    background: #000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    z-index: 9999;
+}
+#modal-window a {
+    text-decoration: none;
+}
+#modal-window label {
+    min-width: 150px;
+}
+#details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 600px;
+    background: #fff;
+    border: 1px solid orange;
+    border-radius: 4px;
+    z-index: 99999;
+    opacity: 1;
+}
+
+#close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+#addProduct {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+}
+#myBasket {
+    border: none;
+    border-radius: 4px;
+    width: 25px;
+    margin-left: 17px;
+}
+.btnNavigation {
+    border-radius: 4px;
+    width: 35px;
+    height: 35px;
+}
+.exit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    color: red;
+}
+.imgHyperlink {
+    width: 105px;
+    height: 105px;
+    border: 2px solid gray;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 15px;
+}
+#sort>input {
+    visibility: hidden;
+}
+#show_filter {
+    background-color: deepskyblue;
+}
+.hl {
+    padding: 3px 15px;
+}
+.view-edit * {
+    min-width: 350px;
+    margin: 5px;
+}
+.view-edit textarea {
+    min-height: 150px;
+}
