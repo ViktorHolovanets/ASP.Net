@@ -31,3 +31,6 @@ $('#edit-details').on('input', function () {
 $('#edit-image').on('focusout', function () {
     $('#view-image').attr('src',$(this).val());
 })
+$('.link').on('click', function (e) {
+    $(this).append('<div class="pulse"></div>');
+})

@@ -43,10 +43,25 @@ body * {
     border-bottom: 1px solid orange;
     text-decoration: none;
     background-color: transparent;
-    
+    position: relative;
+    overflow: hidden;
 }
     .link:hover {
         box-shadow: 0 0 10px aquamarine;
         border-radius: 5px;
         border-bottom: none;
     }
+.pulse {
+    width: 2px;
+    height: 2px;
+    background-color: aquamarine;
+    animation: pulse 0.4s ease;
+    border-radius: 50%;
+    position: absolute;
+}
+@keyframes pulse {
+    to {
+        transform: scale(100);
+        opacity: 0;
+    }
+}
