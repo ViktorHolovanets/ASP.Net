@@ -40,10 +40,13 @@ body * {
     margin: 35px;
     display: inline-block;
     padding: 15px 25px;
-    border-radius: 5px;
+    border-bottom: 1px solid orange;
     text-decoration: none;
-    background-color: rgb(30,10,25);
+    background-color: transparent;
+    
 }
     .link:hover {
         box-shadow: 0 0 10px aquamarine;
+        border-radius: 5px;
+        border-bottom: none;
     }
