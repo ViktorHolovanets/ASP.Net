@@ -37,9 +37,8 @@ body {
 }
 img {
     box-sizing: border-box;
-    width: 100%;
-    flex-grow: 1;
-    justify-self: flex-start;
+    height: 100%;
+    max-width: 100%;
 }
 .cat {
     text-align: right;
@@ -152,4 +151,27 @@ img {
 }
 .view-edit textarea {
     min-height: 150px;
+}
+.showCategory {
+    max-height: 190px;
+    position: relative;
+    flex-grow: 1;
+    text-align: center;
+}
+.imgDetails {
+    max-width: 500px;
+    height: 350px;
+    float: left;
+    margin: 10px;
+}
+p {
+    text-align: justify;
+}
+.result-details {
+    position: relative
+}
+.result-details:after {
+    content: "";
+    display: block;
+    margin: 70px;
 }
