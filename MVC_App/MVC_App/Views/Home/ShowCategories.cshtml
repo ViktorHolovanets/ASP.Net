@@ -3,34 +3,60 @@
 *@
 
 @using System.Diagnostics
-@{
-
-}
 @model IEnumerable<Product>
+
 <label>
-    Sort:  
-    <input type="radio" name="sort" value="name"/> Name 
-    <input type="radio" name="sort" value="price"/> Price
+    Sort:
+    <input type="radio" name="sort" value="name" /> Name
+    <input type="radio" name="sort" value="price" /> Price
+    <input type="button" value="⬆" class="btnsort" />
 </label>
 <div id="result">
     @await Html.PartialAsync("ViewSort", Model)
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script>
-    let t = document.querySelectorAll('input[type=radio][name="sort"]');
-    for (var i = 0; i < t.length; i++) {
-        t[i].addEventListener('change',function(e) {
-            console.log(e.target.value);
-        
-            let r = document.getElementById('result');
-            console.log(r);
-            r.innerHTML = '';
-            if (e.target.value == 'name') {
-                r.innerHTML = `@await Html.PartialAsync("ViewSort", Model.OrderBy(p=>p.Name))`;
-            }
-            else if (e.target.value == 'price') {
-                r.innerHTML = `@await Html.PartialAsync("ViewSort", Model.OrderBy(p=>p.Price))`;
-            }
-        });
-    }
+    $(() => {
+        let t = $('input[type=radio][name="sort"]');
+        t.on('change',
+            function(e) {
+                let r = document.getElementById('result');
+                r.innerHTML = '';
+                if (e.target.value == 'name') {
+                    r.innerHTML = `@await Html.PartialAsync("ViewSort",SortOrderByName() )`;
+                } else if (e.target.value == 'price') {
+                    r.innerHTML = `@await Html.PartialAsync("ViewSort", SortOrderByPrice())`;
+                }
+            });
+        $('.btnsort').on('click',
+            function() {
+                if ($(this).hasClass('Descending')) {
+                    $(this).val('⬆');
+                    if ($('input[type=radio][name="sort"]:checked').val() == 'name') {
+                        $('#result').html(`@await Html.PartialAsync("ViewSort", SortOrderByName())`);
+                    } else if ($('input[type=radio][name="sort"]:checked').val() == 'price') {
+                        $('#result').html(`@await Html.PartialAsync("ViewSort", SortOrderByPrice())`);
+                    }
+                } else {
+                    $(this).val('⬇');
+                    if ($('input[type=radio][name="sort"]:checked').val() == 'name') {
+                        $('#result').html(`@await Html.PartialAsync("ViewSort", SortOrderByDescendingName())`);
+                    } else if ($('input[type=radio][name="sort"]:checked').val() == 'price') {
+                        $('#result').html(`@await Html.PartialAsync("ViewSort", SortOrderByDescendingPrice())`);
+                    }
+                }
+                $(this).toggleClass('Descending');
+            });
+    });
 </script>
 
+@functions
+{
+    public IEnumerable<Product> SortOrderByName() => Model.OrderBy(p => p.Name);
+
+    public IEnumerable<Product> SortOrderByPrice() => Model.OrderBy(p => p.Price);
+
+    public IEnumerable<Product> SortOrderByDescendingName() => Model.OrderByDescending(p => p.Name);
+
+    public IEnumerable<Product> SortOrderByDescendingPrice() => Model.OrderByDescending(p => p.Price);
+}
