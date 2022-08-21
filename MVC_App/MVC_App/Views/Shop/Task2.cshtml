@@ -1,0 +1,32 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model User
+<div id="modal-window">
+    <div id="details">
+        <a href="#" id="close" onclick="closeModalWindow(event)">❌</a>
+        <form method="post" asp-action="Task2">
+            <label>Login: </label>
+            <input type="text" name="login"/><br/><br/>
+            <label>Password: </label>
+            <input type="text" name="password"/><br/><br/>
+            <input type="submit"/>
+        </form>
+    </div>
+</div>
+@if (Model ==null)
+{
+    <button class="user">👤</button>
+}
+else
+{
+    <p class="user">@Model.Login</p>
+    <form method="post" asp-action="Task2" >
+        <input type="submit" class="exit" value="Exit"/>
+    </form>
+}
+<div class="content">
+    <a asp-route-category="Смартфони" asp-action="ShowCategories"><img src="~/Images/android.png" class="imgHyperlink" title="Смартфони"/></a>
+    <a  asp-route-category="Ноутбуки" asp-action="ShowCategories"><img src="~/Images/technology-items (1).png" class="imgHyperlink" title="Ноутбуки"/></a>
+    <a asp-route-category="Побутова техніка" asp-action="ShowCategories"><img src="~/Images/pngtree-fridge-icon-for-your-project-png-image_1520793.jpg" class="imgHyperlink" title="Побутова техніка"/></a>
+</div>

@@ -8,15 +8,14 @@
     @if (ViewBag.IsUser)
     {
         <form method="post">
-            @*<input type="hidden" value="@Request.Cookies["id"]" name="idClient"/>*@
-            <input type="hidden" value="@Model.Id" name="idProduct"/>
+            <input type="hidden" value="@Model.Id" name="idProduct" />
             <input type="image" src="~/Images/buy.png" id="addProduct" class="btnNavigation">
         </form>
     }
     <h2>@Model.Name</h2>
     <p class="price">Price: @Model.Price ₴</p>
-    <div class="imgDetails">
-        <img src="@Model.Image"/>
+    <div class="class-flex">
+        <img src="@Model.Image" class="img"/>
+        <p>@Model.Details</p>
     </div>
-    <p>@Model.Details</p>
 </div>

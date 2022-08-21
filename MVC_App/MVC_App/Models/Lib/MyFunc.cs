@@ -1,4 +1,5 @@
 ﻿using MVC_App.Models.DB;
+using MVC_App.ModelsViews;
 
 namespace MVC_App.Models.Lib
 {
@@ -527,6 +528,16 @@ microSD
                 category = c3
             });
             db.SaveChanges();
+        }
+
+        public static List<ViewProduct> GetViewProducts(List<Product> list)
+        {
+            List<ViewProduct> products = new List<ViewProduct>();
+            foreach (var product in list)
+            {
+                products.Add(new ViewProduct(product.Id, product.Name, product.Price, product.Image));
+            } 
+            return products;
         }
     }
 

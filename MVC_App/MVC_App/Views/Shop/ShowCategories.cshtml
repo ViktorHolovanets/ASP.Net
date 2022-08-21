@@ -3,7 +3,7 @@
 *@
 
 @using System.Diagnostics
-@model IEnumerable<Product>
+@model IEnumerable<ViewProduct>
 
 <label>
     Sort:
@@ -52,11 +52,11 @@
 
 @functions
 {
-    public IEnumerable<Product> SortOrderByName() => Model.OrderBy(p => p.Name);
+    public IEnumerable<ViewProduct> SortOrderByName() => Model.OrderBy(p => p.Name);
 
-    public IEnumerable<Product> SortOrderByPrice() => Model.OrderBy(p => p.Price);
+    public IEnumerable<ViewProduct> SortOrderByPrice() => Model.OrderBy(p => p.Price);
 
-    public IEnumerable<Product> SortOrderByDescendingName() => Model.OrderByDescending(p => p.Name);
+    public IEnumerable<ViewProduct> SortOrderByDescendingName() => Model.OrderByDescending(p => p.Name);
 
-    public IEnumerable<Product> SortOrderByDescendingPrice() => Model.OrderByDescending(p => p.Price);
+    public IEnumerable<ViewProduct> SortOrderByDescendingPrice() => Model.OrderByDescending(p => p.Price);
 }
