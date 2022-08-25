@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model SingletonDb
+<div class="content">
+    <div class="section">
+        <h3 class="accordion-header">Create Account</h3>
+        <form method="post" class="form" asp-controller="Home" asp-action="Index">
+            <label>
+                Login:<br/>
+                <input type="text" placeholder="Login" name="login"/><br/>
+                Password:<br/>
+                <input type="text" placeholder="Password" name="password"/><br/>
+                Name:<br/>
+                <input type="text" placeholder="Name" name="Name"/><br/>
+                Surname:<br/>
+                <input type="text" placeholder="Surname" name="Surname"/><br/>
+                Birthdate:<br/>
+                <input type="date" placeholder="Birthdate" name="Birthdate"/><br/>
+                <input type="submit" value="Create"/>
+            </label>
+        </form>
+        <h3 class="accordion-header">Create User</h3>
+        <form method="post" class="form" asp-controller="Home" asp-action="CreateUser">
+            <label>
+                Name:<br/>
+                <input type="text" placeholder="Name" name="Name"/><br/>
+                Surname:<br/>
+                <input type="text" placeholder="Surname" name="Surname"/><br/>
+                Birthdate:<br/>
+                <input type="date" placeholder="Birthdate" name="Birthdate"/><br/>
+                <input type="submit" value="Create"/>
+            </label>
+        </form>
+        <h3 class="accordion-header">Create Employ</h3>
+        <form method="get" class="form" asp-controller="Home" asp-action="CreateEmploy">
+            <label>
+                Id:<br/>
+                <input type="number" placeholder="Id" name="Id"/><br/>
+                Name:<br/>
+                <input type="text" placeholder="Name" name="Name"/><br/>
+                <input type="submit" value="Create"/>
+            </label>
+        </form>
+        <h3 class="accordion-header">Convert DateTime</h3>
+        <form method="post" class="form" asp-controller="Home" asp-action="CreateDateTime">
+            <label>
+                Id:<br/>
+                <input type="date"  name="date"/><br/>
+                Name:<br/>
+                <input type="time" placeholder="Name" name="time"/><br/>
+                <input type="submit" value="Create"/>
+            </label>
+        </form>
+
+    </div>
+    <div class="section">
+        <h3 class="accordion-header">List Accounts</h3>
+        <div class="form">
+            @foreach (var user in Model._accounts)
+            {
+                @await Html.PartialAsync("ViewAccount", @user.Client);
+            }
+        </div>
+        <h3 class="accordion-header">List Users</h3>
+        <div class="form">
+            @foreach (var user in Model._users)
+            {
+                @await Html.PartialAsync("ViewAccount", @user);
+            }
+        </div>
+        <h3 class="accordion-header">List Employs</h3>
+        <div class="form">
+            @foreach (var employ in Model._employs)
+            {
+                @await Html.PartialAsync("ViewEmploy", @employ);
+            }
+        </div>
+        <h3 class="accordion-header">List DateTime</h3>
+        <div class="form">
+            @await Html.PartialAsync("ViewDateTime", @Model.MyDateTimes)
+        </div>
+    </div>
+</div>

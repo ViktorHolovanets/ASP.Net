@@ -1,0 +1,72 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: azure;
+}
+
+.content {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+    .content > * {
+        flex-basis: 50%;
+    }
+
+.form {
+    display: none;
+}
+
+    .form > label > input {
+        width: 190px;
+        margin: 5px;
+    }
+
+.user {
+    border: 1px solid aquamarine;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 5px;
+}
+
+.accordion-header:after {
+    content: '▼';
+    font-family: sans-serif;
+    display: block;
+    float: right;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.accordion-header.active:after {
+    content: '▲';
+    font-family: sans-serif;
+    color: red;
+}
+
+.accordion-header {
+    cursor: pointer;
+    padding: 10px 0;
+    color: aquamarine;
+    overflow: hidden;
+}
+.section {
+    border: 2px solid orange;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 7px;
+}
