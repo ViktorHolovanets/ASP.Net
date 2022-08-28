@@ -1,0 +1,18 @@
+﻿@using TagHtml_Helper.Helpers
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="content">
+    <a href='@Url.Action("CreateUser", "Home", null)'>
+        <h4>Create User</h4>
+        @HelperForm.HelperFormUser(Html)
+    </a>
+    @if (ViewBag.IsUsers)
+    {
+        <a href='@Url.Action("ViewUsers", "Home", null)' class="view-users">
+            <h4>View Users</h4>
+            @HelperForm.HelperViewUser(Html)
+        </a>
+    }
+</div>

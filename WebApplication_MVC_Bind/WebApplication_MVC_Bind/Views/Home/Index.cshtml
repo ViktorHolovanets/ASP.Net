@@ -59,14 +59,14 @@
         <div class="form">
             @foreach (var user in Model._accounts)
             {
-                @await Html.PartialAsync("ViewAccount", @user.Client);
+                @await Html.PartialAsync("ViewAccount", @user);
             }
         </div>
         <h3 class="accordion-header">List Users</h3>
         <div class="form">
             @foreach (var user in Model._users)
             {
-                @await Html.PartialAsync("ViewAccount", @user);
+                @await Html.PartialAsync("ViewUser", @user);
             }
         </div>
         <h3 class="accordion-header">List Employs</h3>
