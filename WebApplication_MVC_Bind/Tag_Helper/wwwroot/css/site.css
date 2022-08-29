@@ -1,0 +1,114 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: black;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    font-family: cursive;
+    color: azure;
+    margin: 10px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    background-color: rgb(247, 144, 9);
+    position: relative;
+    left: -70px;
+    padding: 15px;
+    padding-left: 70px;
+    width: 80%;
+    text-transform: uppercase;
+    color: white;
+}
+
+.c {
+    background-color: darkcyan;
+    margin: 10px auto;
+    width: 800px;
+    height: 450px;
+    padding: 15px;
+    box-sizing: content-box;
+    position: relative;
+    top: 50px;
+ 
+}
+
+.flag {
+    width: 350px;
+    position: relative;
+    left: 465px;
+    bottom: 293px;
+    overflow: hidden;
+   
+}
+
+.flag > img {
+    width: 100%;
+    position: relative;
+    left: 90px;
+}
+
+form {
+    font-size: 2rem;
+    width: 70%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-items: flex-start;
+    align-content: space-between;
+}
+
+input {
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+    border-bottom: solid 1px #f2f2f2;
+    background-color: rgb(144, 240, 208);
+    padding-left: 7px;
+    margin-top: 10px;
+}
+
+input:focus {
+    border-bottom: solid 3px #615f5f;
+}
+
+label > div {
+    width: 560px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    justify-content: space-between;
+}
+
+label > div input {
+    width: 150px;
+}
+.btn-save {
+    position: absolute;
+    top: 110%;
+    width: 150px;
+    background-color: chartreuse;
+    border-radius: 15px 0 15px 0;
+    border: 2px solid thistle;
+}

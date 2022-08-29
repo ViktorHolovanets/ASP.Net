@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="c">
+    <div class="fake"></div>
+    <h1>Credit Card Details</h1>
+    <div class="content">
+        <form >
+            <label for="numbcard" >Card Number</label>
+            <input type="text" id="numbcard" name="numbcard" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" pattern="[0-9]{16}">
+            <label for="namecard">Name on Card</label>
+            <input type="text" id="namecard" name="namecard" placeholder="Name Surname">
+            <label>
+                Expiry Dane<br>
+                <div>
+                    <input type="number" min="1" max="31" placeholder="2">
+                    <input type="number" min="2020" max="2026" placeholder="2022">
+                    <label >CVV/CVN<br><input type="password" maxlength="3" placeholder="***"></label>
+                </div>
+            </label>
+            <input type="submit" value="Save" class="btn-save"/>
+        </form>
+    </div>
+    <div class="flag">
+        <img src="~/Image/moon_flag.png"/>
+    </div>
+</div>
