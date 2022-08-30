@@ -1,8 +1,17 @@
-﻿@addTagHelper *, MvcApp
+﻿@addTagHelper *, Tag_Helper
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<mymenu></mymenu>
-<timer></timer>
+<mymenu page-link="/Home/CreditCard">
+    <img src="~/Image/credit_card.png"/>
+</mymenu>
+<mymenu page-link="/Home/User">
+    <img src="~/Image/member_card.png"/>
+</mymenu>
+
+@if (ViewBag.Message != null)
+{
+    <modal-window>@ViewBag.Message</modal-window>
+}

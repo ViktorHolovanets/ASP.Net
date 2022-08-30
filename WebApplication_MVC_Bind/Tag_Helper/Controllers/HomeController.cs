@@ -22,9 +22,29 @@ namespace Tag_Helper.Controllers
         {
             return View();
         }
-        public IActionResult DetailsCard()
+        public IActionResult CreditCard()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult CreditCard(BankCard card)
+        {
+            card.Id= Guid.NewGuid().ToString();
+            // Відповідна логіка
+            ViewBag.Message = "Add Credit card";
+            return View("Index");
+        }
+        public IActionResult User()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult User(User user)
+        {
+            ViewBag.Message = $"Add User {user.FirstName} {user.LastName}";
+            user.SetBirthday(Request.Form["date"]);
+            // Відповідна логіка
+            return View("Index");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

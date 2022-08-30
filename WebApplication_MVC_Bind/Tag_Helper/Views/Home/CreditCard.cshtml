@@ -1,23 +1,22 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
+@model BankCard
 <div class="c">
     <div class="fake"></div>
     <h1>Credit Card Details</h1>
     <div class="content">
-        <form >
+        <form method="post">
             <label for="numbcard" >Card Number</label>
-            <input type="text" id="numbcard" name="numbcard" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" pattern="[0-9]{16}">
+            <input type="text" id="numbcard" asp-for="NumbCard" maxlength="19" placeholder="xxxx xxxx xxxx xxxx" pattern="^[0-9]{16}$">
             <label for="namecard">Name on Card</label>
-            <input type="text" id="namecard" name="namecard" placeholder="Name Surname">
+            <input type="text" id="namecard" asp-for="SurnameClientBank" placeholder="Surname client">
             <label>
                 Expiry Dane<br>
                 <div>
-                    <input type="number" min="1" max="31" placeholder="2">
-                    <input type="number" min="2020" max="2026" placeholder="2022">
-                    <label >CVV/CVN<br><input type="password" maxlength="3" placeholder="***"></label>
+                    <input type="number" min="1" max="12" placeholder="2" asp-for="Month">
+                    <input type="number" min="2020" max="2026"  placeholder="2022" asp-for="Year">
+                    <label >CVV/CVN<br><input type="password" maxlength="3" placeholder="***" asp-for="CVN"></label>
                 </div>
             </label>
             <input type="submit" value="Save" class="btn-save"/>

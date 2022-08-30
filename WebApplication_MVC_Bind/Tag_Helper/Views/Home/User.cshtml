@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model User
+<form class="form-user" method="post">
+    <div class="content">
+        <div class="registration-details">
+            <h2>Registration form</h2>
+            <label>
+                <img src="~/Image/username.png">
+                <input type="text" asp-for="Login" placeholder="Login" class="styleinput">
+            </label>
+            <br>
+            <label>
+                <img src="~/Image/email.png">
+                <input type="email" asp-for="Mail" placeholder="Email address" class="styleinput">
+            </label>
+            <br>
+            <label>
+                <img src="~/Image/pswd.png">
+                <label class=" labelpassword">
+                    <input type="password" asp-for="Password" placeholder="Password" class="styleinput">
+                    <input type="password" placeholder="Confirm password" class="styleinput">
+                </label>
+
+            </label>
+            <br>
+        </div>
+        <div class="registration-details details">
+            <h2>Personal details</h2>
+            <label>
+                <input type="text" asp-for="FirstName" placeholder="First name" class="styleinput">
+                <input type="text" asp-for="LastName" placeholder="Last name" class="styleinput">
+            </label>
+            <br>
+            <label>
+                <select asp-for="sex" asp-items="Html.GetEnumSelectList<Sex>()" class="styleinput"></select>
+                <input type="date" name="date" class="styleinput">
+            </label>
+        </div>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" asp-for="IsReceivMems">
+            I want to receiv mems and special offers
+        </label>
+        <br>
+        <label>
+            <input type="checkbox" asp-for="IsAgreeConditions">
+            I agree with the Terms and Conditions
+        </label>
+    </div>
+    <hr>
+    <button type="submit" >Submit</button>
+</form>
