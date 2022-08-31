@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication_MVC_Bind", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TagHtml_Helper", "TagHtml_Helper\TagHtml_Helper.csproj", "{E67553BF-A59C-4BE5-88CA-771621D29738}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tag_Helper", "Tag_Helper\Tag_Helper.csproj", "{485DC78D-E4E4-4ADA-8E5B-E1DA7895F811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tag_Helper", "Tag_Helper\Tag_Helper.csproj", "{485DC78D-E4E4-4ADA-8E5B-E1DA7895F811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewComponent_ASP_MVC", "ViewComponent_ASP_MVC\ViewComponent_ASP_MVC.csproj", "{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{485DC78D-E4E4-4ADA-8E5B-E1DA7895F811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{485DC78D-E4E4-4ADA-8E5B-E1DA7895F811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{485DC78D-E4E4-4ADA-8E5B-E1DA7895F811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

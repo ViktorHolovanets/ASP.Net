@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ResultUser
+<div id="view-user">
+    <h2>Random user</h2>
+    <div class="content">
+        <div class="image-edit">
+            <vc:tag-image src="@Model.Image"/>
+            <div id="edit">
+                <img src="~/edit.png"/>
+            </div>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <th>Firstname:</th>
+                    <td>@Model.FirstName</td>
+                </tr>
+                <tr>
+                    <th>Lastname</th>
+                    <td>@Model.LastName</td>
+                </tr>
+                <tr>
+                    <th>Age</th>
+                    <td>@Model.Age</td>
+                </tr>
+                <tr>
+                    <th>Gender</th>
+                    <td>@Model.Gender</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>@Model.Phone</td>
+                </tr>
+                <tr>
+                    <th>Dog</th>
+                    <td>
+                        <vc:tag-image/>
+                    </td>
+                </tr>
+            </table>
+            <div id="edit-user">
+                @await Component.InvokeAsync("EditUser", new{user=Model})
+            </div>
+        </div>
+    </div>
+</div>
+
