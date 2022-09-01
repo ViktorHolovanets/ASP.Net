@@ -86,7 +86,3 @@ main {
 input.input-validation-error {
     border: 1px solid #b94a48;
 }
-
-input.valid {
-    border: 1px solid #16a085;
-}
