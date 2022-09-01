@@ -68,3 +68,25 @@ main {
     min-width: 75px;
     margin: 5px;
 }
+.edit-user > input {
+    border: none;
+    border-radius: 5px;
+    outline-color: bisque;
+    margin: 5px;
+}
+.edit-user > input[type="submit"] {
+    width: 150px;
+    background-color: darkcyan;
+    color: white;
+}
+.field-validation-error {
+    color: #b94a48;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input.valid {
+    border: 1px solid #16a085;
+}
