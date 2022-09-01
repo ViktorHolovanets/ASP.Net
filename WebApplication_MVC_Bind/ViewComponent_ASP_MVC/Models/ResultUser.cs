@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 using Newtonsoft.Json.Linq;
 using ViewComponent_ASP_MVC.Library;
@@ -7,13 +8,18 @@ namespace ViewComponent_ASP_MVC.Models
 {
     public class ResultUser
     {
+        [Required]
+        [Range(1, 100)]
         public int Age { get; set; }
+        [Required]
         public string Email { get; set; }
+        [RegularExpression(@"^(female|male)$", ErrorMessage = "female / male")]
         public string Gender { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
         public string Phone { get; set; }
-        [XmlAttribute("large")]
         public string Image { get; set; }
 
         public static ResultUser CreateUser()

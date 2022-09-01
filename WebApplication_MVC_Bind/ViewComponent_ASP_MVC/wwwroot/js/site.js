@@ -18,7 +18,7 @@ $(() => {
         });
     $('#edit').on('click',
         function () {
-            $('#edit-user').fadeToggle();
-            $('table').fadeToggle();
+            $('#edit-user').slideToggle(100);
+            $('table').slideToggle(100);
         });
 });

@@ -4,17 +4,25 @@
 @model ResultUser
 <form method="post">
     <input type="hidden" asp-for="Image"/>
+    <div><span asp-validation-for="FirstName"/></div>
     <label asp-for="FirstName"></label>
     <input asp-for="FirstName"/><br/>
+    <div><span asp-validation-for="LastName"/></div>
     <label asp-for="LastName"></label>
     <input asp-for="LastName"/><br/>
+    <div><span asp-validation-for="Age"/></div>
     <label asp-for="Age"></label>
     <input asp-for="Age"/><br/>
+    <div><span asp-validation-for="Gender"/></div>
     <label asp-for="Gender"></label>
     <input asp-for="Gender"/><br/>
+    <div><span asp-validation-for="Email"/></div>
     <label asp-for="Email"></label>
-    <input asp-for="Email"/><br/>
+    <input type="email" asp-for="Email"/><br/>
     <label asp-for="Phone"></label>
     <input asp-for="Phone"/><br/>
     <input type="submit" value="Save"/>
 </form>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>

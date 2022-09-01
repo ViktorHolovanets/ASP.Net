@@ -20,7 +20,7 @@ namespace ViewComponent_ASP_MVC.Controllers
         [HttpPost]
         public IActionResult Index(ResultUser user)
         {
-            return View(user);
+            return View(ModelState.IsValid? user:null);
         }
         public IActionResult Privacy()
         {
