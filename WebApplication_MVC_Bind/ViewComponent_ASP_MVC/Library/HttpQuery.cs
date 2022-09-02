@@ -2,7 +2,7 @@
 {
     public class HttpQuery
     {
-        public static string GetResponse(string url)
+        public static async Task<string> GetResponse(string url)
         {
             var client = new HttpClient();
             var request = new HttpRequestMessage
@@ -14,10 +14,9 @@
             using (var response = client.Send(request))
             {
                 response.EnsureSuccessStatusCode();
-                result = response.Content.ReadAsStringAsync().Result;
+                result = await response.Content.ReadAsStringAsync();
+                return result;
             }
-
-            return result;
         }
     }
 }

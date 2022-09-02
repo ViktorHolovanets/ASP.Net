@@ -27,7 +27,7 @@ namespace ViewComponent_ASP_MVC.Models
             try
             {
                 var res = HttpQuery.GetResponse("https://randomuser.me/api/");
-                JObject js = JObject.Parse(res);
+                JObject js = JObject.Parse(res.Result);
                 var user = new ResultUser()
                 {
                     Age = Int16.Parse(js["results"][0]["dob"]["age"].ToString()),

@@ -9,7 +9,8 @@ namespace ViewComponent_ASP_MVC.Componets
     {
         public string Invoke()
         {
-            return $"Ip: {JsonSerializer.Deserialize<ResultMyIp>(HttpQuery.GetResponse("https://api.ipify.org/?format=json")).ip}";
+            var res = HttpQuery.GetResponse("https://api.ipify.org/?format=json");
+            return $"Ip: {JsonSerializer.Deserialize<ResultMyIp>(res.Result).ip}";
         }
     }
 }

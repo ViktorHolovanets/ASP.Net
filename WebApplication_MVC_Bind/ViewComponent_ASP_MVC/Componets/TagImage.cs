@@ -13,7 +13,7 @@ namespace ViewComponent_ASP_MVC.Componets
         public IViewComponentResult Invoke(string src="")
         {
             return new HtmlContentViewComponentResult(
-                new HtmlString($"<img src={(src!=""?src:JsonSerializer.Deserialize<ResultImageDog>(HttpQuery.GetResponse("https://dog.ceo/api/breeds/image/random")).message)} class='image-dog'/>")
+                new HtmlString($"<img src={(src!=""?src:JsonSerializer.Deserialize<ResultImageDog>(HttpQuery.GetResponse("https://dog.ceo/api/breeds/image/random").Result).message)} class='image-dog'/>")
             );
         }
     }
