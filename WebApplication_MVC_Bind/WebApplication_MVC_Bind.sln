@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TagHtml_Helper", "TagHtml_H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tag_Helper", "Tag_Helper\Tag_Helper.csproj", "{485DC78D-E4E4-4ADA-8E5B-E1DA7895F811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewComponent_ASP_MVC", "ViewComponent_ASP_MVC\ViewComponent_ASP_MVC.csproj", "{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewComponent_ASP_MVC", "ViewComponent_ASP_MVC\ViewComponent_ASP_MVC.csproj", "{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Filters", "Filters\Filters.csproj", "{E17A137C-E510-4241-9CB8-2366ECE12E15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F29485E8-FF40-4DF9-B4A0-5AF61CE3E02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17A137C-E510-4241-9CB8-2366ECE12E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17A137C-E510-4241-9CB8-2366ECE12E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17A137C-E510-4241-9CB8-2366ECE12E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17A137C-E510-4241-9CB8-2366ECE12E15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
