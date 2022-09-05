@@ -1,0 +1,61 @@
+﻿@model PaginationSortingFiltering.Models.DB.Book
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="row ">
+    <div class="col-4"></div>
+    <div class="col-4 bg-light text-center">
+    <h1 class="text-primary text-center">Edit</h1>
+
+    <h4 class="text-primary text-center">Book</h4>
+
+    <hr />
+    <div class="text-center">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label text-success font-weight-bold"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Authors" class="control-label text-success font-weight-bold"></label>
+                <input asp-for="Authors" class="form-control"/>
+                <span asp-validation-for="Authors" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label text-success font-weight-bold"></label>
+                <input asp-for="Image" class="form-control"/>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Information" class="control-label text-success font-weight-bold"></label>
+                <input asp-for="Information" class="form-control" />
+                <span asp-validation-for="Information" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categori" class="control-label text-success font-weight-bold"></label>
+                <select name="categori" asp-for="@Model.Categori" asp-items=" Html.GetEnumSelectList(typeof(Categories))" class="form-control"></select>
+                <span asp-validation-for="Categori" class="text-danger"></span>
+            </div>
+            <div class="form-group m-1">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+    <div class="col-4"></div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

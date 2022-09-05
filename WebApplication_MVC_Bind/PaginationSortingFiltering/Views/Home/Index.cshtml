@@ -1,0 +1,69 @@
+﻿@model ViewSortPage
+@{
+    ViewData["Title"] = "Home Page";
+    var author = Model.sortState == SortState.TitleAsc || @Model.sortState == SortState.TitleDesc ? SortState.AuthorAsc : Model.sortState;
+    var title = Model.sortState == SortState.AuthorAsc || @Model.sortState == SortState.AuthorDesc ? SortState.TitleAsc : Model.sortState;
+}
+<a class="nav-link" asp-action="Index"
+   asp-route-sortstate="@title"
+   asp-route-page="@Model.Page"
+   asp-route-categori="@Model.Categori"
+   asp-route-issort="@true">
+    <button class="rounded-1 bg-info border-0">Title</button>
+</a>
+
+
+<a class="nav-link" asp-action="Index"
+   asp-route-sortstate="@author"
+   asp-route-page="@Model.Page"
+   asp-route-categori="@Model.Categori"
+   asp-route-issort="@true"><button class="rounded-1 bg-info border-0">Authors</button></a>
+<form method="get">
+    @Html.Hidden("sortstate", Model.sortState)
+    <select name="categori" asp-items=" Html.GetEnumSelectList(typeof(Categories))">
+        <option disabled selected>All books</option>
+    </select>
+    <input type="submit" />
+</form>
+<div class="row books">
+    @foreach (var book in Model!.Books)
+    {
+        @await Html.PartialAsync("ViewBook", book)
+    }
+</div>
+<nav class="mt-2">
+    <ul class="pagination justify-content-center">
+        @if (Model.Page != 0)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.Page-1)"
+               asp-route-sortstate="@Model.sortState"
+               asp-route-categori="@Model.Categori"
+               aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+        @for (var i = 0; i < Model.TotalPages; i++)
+        {
+            <li class='@(Model.Page==i?"page-item active":"page-item")'>
+                <a class="page-link" asp-action="Index"
+               asp-route-sortstate="@Model.sortState"
+               asp-route-page="@i"
+               asp-route-categori="@Model.Categori">@(i+1)</a>
+            </li>
+        }
+        @if (Model.Page < Model.TotalPages - 1)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index"
+               asp-route-page="@(Model.Page+1)"
+               asp-route-sortstate="@Model.sortState"
+               asp-route-categori="@Model.Categori"
+               aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

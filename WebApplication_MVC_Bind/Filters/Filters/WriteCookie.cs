@@ -14,6 +14,8 @@ namespace Filters.Filters
 
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
+            var r = context.HttpContext.Request.Form["cate"];
+            
             context.HttpContext.Response.Cookies.Append(_cookieKey, _cookieValue);
         }
 

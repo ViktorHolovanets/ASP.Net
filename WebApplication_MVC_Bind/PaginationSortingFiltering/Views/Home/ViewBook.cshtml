@@ -1,0 +1,23 @@
+﻿@model Book
+<div class="col-12 col-sm-0 col-md-0 col-lg-1 col-xl-1"></div>
+<div class="col-12 col-sm-12 col-dm-12 col-lg-5 col-xl-3 book">
+    <div class="opacity-backgroumd"></div>
+    <div class="d-flex flex-row">
+        <img src="@Model.Image" alt="Cover">
+        <div class="info">
+            <h5>
+                <a class="nav-link text-danger font-monospace" href="@Model.Information">@Model.Title</a>
+            </h5>
+            <p class="text-white" title="@Model.Authors">
+                Authors
+            </p>
+            <div>
+                <form>                   
+                    <input type="submit" asp-action="Delete" asp-route-id="@Model.Id" value="❌" class="bg-danger border border-light rounded-pill"/>
+                    <input type="submit" asp-action="Edit" asp-route-id="@Model.Id" style="font-family:Wingdings;" value="?" class="bg-info border border-primary rounded-pill"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
