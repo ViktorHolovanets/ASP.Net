@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SportSite</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SportSite.st yles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-danger" asp-area="" asp-controller="Home" asp-action="Index">SportSite</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <li class="nav-item m-1">
+                            <a class="nav-link text-info font-weight-bold font-italic" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item m-1">
+                            <a class="nav-link text-info font-weight-bold font-italic font-si" href="#footer">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="user" class="nav-link text-info font-weight-bold font-italic font-si" href="/Home/Privacy" onclick="return @User.Identity.IsAuthenticated.ToString().ToLower()">
+                                <img src="~/Images/user.ico" class="w-25" id="profile" />
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            <div id="modal-window">
+                <div id="details">
+                    <a href="#" id="close">❌</a>
+                    <div>
+                        <a href="#" class="link-btn show-enter">Enter</a><br />
+                        <a class="link-btn"  asp-action="CreateAccount" asp-controller="Home">Registration</a>
+                    </div>
+                    <div id="enter">
+                        <vc:enter-user/>
+                    </div>
+                    
+                </div>
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer id="footer" class="border-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4 text-center">
+                    <h2>
+                        Telephones:
+                    </h2>
+                    <p>Telephone 1</p>
+                    <p>Telephone 2</p>
+                    <p>Telephone 3</p>
+                </div>
+                <div class="col-4 text-center">
+                    <h2>
+                        Address:
+                    </h2>
+                    <p>Address 1</p>
+                    <p>Address 2</p>
+                    <p>Address 3</p>
+                </div>
+                <div class="col-4 ">
+                    <h2>
+                        Site:
+                    </h2>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

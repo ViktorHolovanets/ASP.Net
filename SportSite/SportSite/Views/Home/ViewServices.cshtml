@@ -1,0 +1,20 @@
+﻿@using SportSite.Models.Db
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<TypeSport>
+@if (Model.Count() > 0)
+{
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <img src="@item.Image" class="img-bcg">
+            <h2>@item.Name</h2>
+        </div>
+        <div class="col"></div>
+    }
+}
+else
+{
+    <p>Not content</p>
+}
