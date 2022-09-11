@@ -7,7 +7,6 @@ namespace SportSite.Models.Db
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        [Required]
         public Account Account { get; set; }
         public List<TimeOfWork> dateOfTraining { get; set; } = new();
     }

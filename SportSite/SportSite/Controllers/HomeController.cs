@@ -38,14 +38,13 @@ namespace SportSite.Controllers
                 db.Accounts.Add(user);
                 db.SaveChanges(); 
 
-                return RedirectToAction("Login", new EnterUserView() { Login=user.Login, Password=user.Password});
+                return Login(new EnterUserView() { Login=user.Login, Password=user.Password}).Result;
             }
             return View();
         }
 
-        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(EnterUserView model)
+        public async Task<IActionResult> Login(EnterUserView? model)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace SportSite.Controllers
                 {
                     await Authenticate(user); // аутентификация
 
-                    return RedirectToAction("Privacy", "Home");
+                    return RedirectToAction("Privacy");
                 }
                 ViewBag.Message = "Incorrect login and (or) password";
             }
