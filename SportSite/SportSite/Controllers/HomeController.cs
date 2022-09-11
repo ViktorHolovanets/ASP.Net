@@ -56,7 +56,7 @@ namespace SportSite.Controllers
 
                     return RedirectToAction("Privacy", "Home");
                 }
-                ViewBag.Message = "Некорректные логин и(или) пароль";
+                ViewBag.Message = "Incorrect login and (or) password";
             }
             return View("Index", db.TypeSports);
         }
