@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - SportSite</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SportSite.st yles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SportSite.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -15,7 +15,7 @@
                 <a class="navbar-brand text-danger" asp-area="" asp-controller="Home" asp-action="Index">SportSite</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon bg-light"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between ">
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
@@ -23,11 +23,11 @@
                             <a class="nav-link text-info font-weight-bold font-italic" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item m-1">
-                            <a class="nav-link text-info font-weight-bold font-italic font-si" href="#footer">Contact</a>
+                            <a class="nav-link text-info font-weight-bold font-italic " href="#footer">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a id="user" class="nav-link text-info font-weight-bold font-italic font-si" href="/Home/Privacy" onclick="return @User.Identity.IsAuthenticated.ToString().ToLower()">
-                                <img src="~/Images/user.ico" class="w-25" id="profile" />
+                            <a id="user" class="nav-link text-info font-weight-bold font-italic" href="/Home/Privacy" onclick="return @User.Identity.IsAuthenticated.ToString().ToLower()">
+                                <img src="~/Images/user.ico" id="profile" />
                             </a>
                         </li>
                     </ul>
@@ -38,11 +38,13 @@
     <div class="container">
         <main role="main" class="pb-3">
             <div id="modal-window">
-                <div id="details">
+                <div id="details" class=" col-12 col-sm-8 col-dm-8 col-lg-5 col-xl-5">
                     <a href="#" id="close">❌</a>
-                    <div>
-                        <a href="#" class="link-btn show-enter">Enter</a><br />
-                        <a class="link-btn"  asp-action="CreateAccount" asp-controller="Home">Registration</a>
+                    <div id="login-registration">
+                        <div class="row d-flex flex-column align-items-center">
+                        <a href="#" class="btn btn-info show-enter col-6 text-center rounded mb-3 text-white fo">Enter</a>
+                        <a class="btn btn-primary col-6  text-center rounded text-white"  asp-action="CreateAccount" asp-controller="Home">Registration</a>
+                    </div>
                     </div>
                     <div id="enter">
                         <vc:enter-user/>

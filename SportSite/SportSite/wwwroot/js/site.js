@@ -9,11 +9,11 @@ $(() => {
     $('#close').on('click', function () {
         $('#modal-window').fadeOut();
         $('#enter').fadeOut();
-        $('.show-enter').parent('div').fadeIn();
+        $('#login-registration').fadeIn();
         return false;
     });
     $('.show-enter').on('click', function () {
-        $(this).parent('div').fadeOut();
+        $('#login-registration').fadeOut(1);
         $('#enter').fadeIn();
     })
 })
