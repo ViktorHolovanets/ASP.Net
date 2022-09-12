@@ -35,7 +35,7 @@ namespace SportSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Accounts.Add(user);
+                db.Clients.Add(new Client { Account=user});
                 db.SaveChanges(); 
 
                 return Login(new EnterUserView() { Login=user.Login, Password=user.Password}).Result;
@@ -68,7 +68,7 @@ namespace SportSite.Controllers
 
 
 
-
+        [Route("")]
         public IActionResult Index()
         {         
             return View(db.TypeSports);

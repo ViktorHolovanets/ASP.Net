@@ -13,7 +13,7 @@ builder.Services.AddDbContext<Db>(options => options.UseSqlServer(connection));
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options => //CookieAuthenticationOptions
         {
-            options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Home/Index");
+            options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/");
         });
 var app = builder.Build();
 
@@ -33,9 +33,13 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-app.MapControllerRoute(
-    name: "Account",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+    );
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

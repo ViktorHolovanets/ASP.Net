@@ -15,5 +15,6 @@ namespace SportSite.Models.Db
         {
             Database.EnsureCreated();
         }
+
     }
 }
