@@ -7,11 +7,14 @@
 {
     @foreach (var item in Model)
     {
-        <div class="col">
-            <img src="@item.Image" class="img-bcg">
-            <h2>@item.Name</h2>
+        <div class="card col-3 m-2 mt-5">
+            <a href="#">
+                <img class="card-img-top" src="@item.Image" alt="Card image">
+                <div class="card-img-overlay">
+                    <h2 class="text-purple text-end font-weight-bold">@item.Name</h2>
+                </div>
+            </a>
         </div>
-        <div class="col"></div>
     }
 }
 else

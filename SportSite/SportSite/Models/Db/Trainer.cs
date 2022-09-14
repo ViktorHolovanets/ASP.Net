@@ -10,8 +10,8 @@ namespace SportSite.Models.Db
         [Required]
         public Account Account { get; set; }
         [Required]
-        public string Details { get; set; }
-        public TypeSport typeSport { get; set; }
-        public List<TimeOfWork> timeOfWorks { get; set; }
+        public string? Details { get; set; }
+        public List<TypeSport>?  typeSports { get; set; }
+        public List<TimeOfWork>? timeOfWorks { get; set; }
     }
 }

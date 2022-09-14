@@ -16,10 +16,14 @@ namespace SportSite.Areas.Edit.Controllers
         {
             _context = context;
         }
+        private Account GetAccount(string? id=null)
+        {
+            return _context.Accounts?.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity.Name);
+        }
         [AcceptVerbs("Get", "Post")]
         public IActionResult IncorrectPassword(string oldpassword)
         {
-            var account = _context.Accounts.FirstOrDefault(a => a.Login == User.Identity.Name);
+            var account = GetAccount();
             return account?.Password == oldpassword ? Json(true) : Json(false);
         }
         // GET: HomeController
@@ -29,17 +33,15 @@ namespace SportSite.Areas.Edit.Controllers
         }
         [Route("Edit/DetailsUser")]
         // GET: HomeController/Details/5
-        public ActionResult DetailsUser()
+        public ActionResult DetailsUser(string? id)
         {
-            var accunt = _context.Accounts.Include(a => a.Client).FirstOrDefault(a => a.Login == User.Identity.Name);
-            return View(accunt.Client);
+            return View(GetAccount(id)?.Client);
         }
 
         // GET: HomeController/Edit/5
-        public ActionResult Edit()
+        public ActionResult Edit(string? id)
         {
-            var accunt = _context.Accounts.Include(a => a.Client).FirstOrDefault(a => a.Login == User.Identity.Name);
-            return View(accunt.Client);
+            return View(_context.GetUser(id)?? GetAccount(id).Client);
         }
 
         // POST: HomeController/Edit/5
@@ -76,7 +78,7 @@ namespace SportSite.Areas.Edit.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var account = _context.Accounts.FirstOrDefault(a => a.Login == User.Identity.Name);
+                    var account =GetAccount();
                     account.Password = newpassword.Password;
                     await _context.SaveChangesAsync();
                 }
@@ -87,25 +89,49 @@ namespace SportSite.Areas.Edit.Controllers
                 return View("DetailsUser");
             }
         }
-        // GET: HomeController/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles = "manager")]
+        public ActionResult ViewProfileManager()
         {
             return View();
         }
-
-        // POST: HomeController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpGet]
+        [Route("ViewUser")]
+        public IActionResult ViewUsers(Role? role=Role.client)
+        {
+            var getlist = (from cl in _context.Accounts 
+                           where cl.Role==role
+                           select cl.Client).ToList();
+            return PartialView(getlist);
+        }
+        public IActionResult ViewCode()
+        {
+            var account=GetAccount();
+            return PartialView(_context.Code.Where(c => c.Сreator == account.Id));
+        }
+       
+        public IActionResult CreateCode()
+        {
+            _context.Code.Add(new CreateCodeAccounts()
+            {
+                Code = Guid.NewGuid(),
+                Сreator = GetAccount().Id
+            });
+            _context.SaveChanges();
+            var account = GetAccount();
+            return PartialView("Viewcode", _context.Code.Where(c => c.Сreator == account.Id));
+        }
+        public ActionResult Delete(string? id)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _context.Accounts.Remove(_context.Accounts.FirstOrDefault(a => a.Client.Id.ToString() == id));
+                _context.SaveChanges();
             }
             catch
             {
-                return View();
+                return View("ViewProfileManager");
             }
+            return View("ViewProfileManager");
         }
     }
 }

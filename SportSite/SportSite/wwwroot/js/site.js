@@ -15,5 +15,6 @@ $(() => {
     $('.show-enter').on('click', function () {
         $('#login-registration').fadeOut(1);
         $('#enter').fadeIn();
-    })
-})
+    });
+    
+});

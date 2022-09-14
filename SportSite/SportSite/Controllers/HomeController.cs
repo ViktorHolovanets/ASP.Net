@@ -19,13 +19,21 @@ namespace SportSite.Controllers
         public HomeController(Db db)
         {
             this.db = db;
+            if (db.TypeSports.Count() < 1)
+            {
+                db.AddTypeSport();
+            }
         }
-        [AcceptVerbs("Get", "Post")]
+        [AcceptVerbs("Get", "Post")] 
         public IActionResult IsLogin(string login)
         {
             return db.Accounts.FirstOrDefault(u => u.Login == login) != null ? Json(false) : Json(true);
         }
-
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult IsCode(string createcode)
+        {
+            return db.Code.FirstOrDefault(code => code.Code.ToString() == createcode) == null ? Json(false) : Json(true);
+        }
         public IActionResult CreateAccount()
         {       
             return View();
@@ -39,6 +47,25 @@ namespace SportSite.Controllers
                 db.SaveChanges(); 
 
                 return Login(new EnterUserView() { Login=user.Login, Password=user.Password}).Result;
+            }
+            return View();
+        }
+
+        public IActionResult CreateAccountCoach()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateAccountCoach(CreateAccountCoachView coach)
+        {
+            if (ModelState.IsValid)
+            {
+                coach.account.Role = Role.coach;
+                db.Trainers.Add(new Trainer { Account = coach.account, Details= coach.Details });
+                db.Code.Remove(db.Code.FirstOrDefault(c => c.Code == coach.CreateCode));
+                db.SaveChanges();
+
+                return Login(new EnterUserView() { Login = coach.account.Login, Password = coach.account.Password }).Result;
             }
             return View();
         }
@@ -98,7 +125,7 @@ namespace SportSite.Controllers
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
-
+       
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

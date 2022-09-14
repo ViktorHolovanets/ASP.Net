@@ -1,0 +1,67 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item m-1">
+                    <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-clients" value="Clients" />
+                </li>
+                <li class="nav-item m-1">
+                    <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-coaches" value="Coaches" />
+                </li>
+                <li class="nav-item m-1">
+                    <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-manager" value="Managers" />
+                </li>
+                <li class="nav-item m-1">
+                    <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-admin" value="Admins" />
+                </li>
+                <li class="nav-item m-1">
+                    <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-code" value="View Code" />
+                    <input type="button" class="btn btn-success text-white font-weight-bold font-italic" id="create-code" value="Create Code" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-3 bg-secondary">
+        @await Html.PartialAsync("DetailsUser")
+    </div>
+    <div class="col-9">
+        <div id="res" class="bg-white"></div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $('#get-clients').on('click', function() {
+            GetList("@Url.Action("ViewUsers")");
+        });
+        $('#get-coaches').on('click', function() {
+            GetList("@Url.Action("ViewUsers", new{role=Role.coach})");
+        });
+        $('#get-manager').on('click', function() {
+            GetList("@Url.Action("ViewUsers", new{role=Role.manager})");
+        });
+        $('#get-admin').on('click', function() {
+            GetList("@Url.Action("ViewUsers", new{role=Role.admin})");
+        });
+        $('#get-code').on('click', function() {
+            GetList("@Url.Action("ViewCode")");
+        });
+        $('#create-code').on('click', function() {
+            GetList("@Url.Action("CreateCode")");
+        });
+        function GetList(url) {
+            $.ajax({
+                type: "Get",
+                url: url,
+                success: function(result) {
+                    $('#res').html(result)
+                    console.log(result);
+                }
+            })
+        }
+    </script>
+}

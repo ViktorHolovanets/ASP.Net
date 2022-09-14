@@ -35,24 +35,37 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container min-vh-100">
         <main role="main" class="pb-3">
             <div id="modal-window">
                 <div id="details" class=" col-12 col-sm-8 col-dm-8 col-lg-5 col-xl-5">
                     <a href="#" id="close">❌</a>
                     <div id="login-registration">
                         <div class="row d-flex flex-column align-items-center">
-                        <a href="#" class="btn btn-info show-enter col-6 text-center rounded mb-3 text-white fo">Enter</a>
-                        <a class="btn btn-primary col-6  text-center rounded text-white"  asp-action="CreateAccount" asp-controller="Home">Registration</a>
-                    </div>
+                            <a href="#" class="btn btn-info show-enter col-6 text-center rounded mb-3 text-white fo">Enter</a>
+                            <div class="dropdown mt-3 text-center">
+                                <a class="btn btn-primary col-6  text-center rounded text-white dropdown-toggle"  id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                    Registration
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item" asp-action="CreateAccount" asp-controller="Home">Client</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" asp-action="CreateAccountCoach" asp-controller="Home">Coach</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div id="enter">
-                        <vc:enter-user/>
+                        <vc:enter-user />
                     </div>
-                    
+
                 </div>
             </div>
             @RenderBody()
+
         </main>
     </div>
 
@@ -89,6 +102,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

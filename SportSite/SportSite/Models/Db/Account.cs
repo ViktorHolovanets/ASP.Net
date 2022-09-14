@@ -6,10 +6,10 @@ namespace SportSite.Models.Db
 {
     public enum Role
     {
-        Client,
-        Trainer,
-        Manager, 
-        Admin
+        client,
+        coach,
+        manager, 
+        admin
     }
     public class Account
     {
@@ -23,6 +23,6 @@ namespace SportSite.Models.Db
         public string? Password { get; set; }
         [Required]
         public User? Client { get; set; }
-        public Role Role { get; set; } = Role.Client;
+        public Role Role { get; set; } = Role.client;
     }
 }

@@ -7,17 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Client\Data\**" />
-    <Compile Remove="Areas\Client\Models\**" />
-    <Content Remove="Areas\Client\Data\**" />
-    <Content Remove="Areas\Client\Models\**" />
-    <EmbeddedResource Remove="Areas\Client\Data\**" />
-    <EmbeddedResource Remove="Areas\Client\Models\**" />
-    <None Remove="Areas\Client\Data\**" />
-    <None Remove="Areas\Client\Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
       <PrivateAssets>all</PrivateAssets>

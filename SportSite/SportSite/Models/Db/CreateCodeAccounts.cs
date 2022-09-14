@@ -3,15 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportSite.Models.Db
 {
-    public class TypeSport
+    public class CreateCodeAccounts
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public Guid Code { get; set; }
         [Required]
-        public string? Name { get; set; }
-        public string? Details { get; set; }
-        public List<Trainer>? trainers { get; set; } = new ();
-        public string? Image { get; set; }
-        
+        public Guid Сreator { get; set; }
     }
 }
