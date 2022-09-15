@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SportSite.Filters;
 using SportSite.Models;
 using SportSite.Models.Db;
 using SportSite.ViewModels;
@@ -87,7 +86,26 @@ namespace SportSite.Controllers
             return View("Index", db.TypeSports);
         }
 
+        public JsonResult NewMessage()
+        {
+            try
+            {
+                var m = new Message()
+                {
+                    Name = Request.Form["name"],
+                    Tel = Request.Form["tel"],
+                    Comments = Request.Form["comments"]
+                };
+                db.Messages.Add(m);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            {
 
+                return Json(false);
+            }
+            return Json(true);
+        }
 
 
 

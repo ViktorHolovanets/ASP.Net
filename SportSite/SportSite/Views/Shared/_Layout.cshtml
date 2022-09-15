@@ -7,12 +7,18 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SportSite.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand text-danger" asp-area="" asp-controller="Home" asp-action="Index">SportSite</a>
+                <a class="navbar-brand text-danger" asp-area="" asp-controller="Home" asp-action="Index">
+                    SportSite <br />
+                    <img src="~/Images/brain-7420599__340.webp" class="icon" />
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon bg-light"></span>
@@ -35,7 +41,7 @@
             </div>
         </nav>
     </header>
-    <div class="container min-vh-100">
+    <div class="container-xl container-sm-full min-vh-100">
         <main role="main" class="pb-3">
             <div id="modal-window">
                 <div id="details" class=" col-12 col-sm-8 col-dm-8 col-lg-5 col-xl-5">
@@ -44,7 +50,7 @@
                         <div class="row d-flex flex-column align-items-center">
                             <a href="#" class="btn btn-info show-enter col-6 text-center rounded mb-3 text-white fo">Enter</a>
                             <div class="dropdown mt-3 text-center">
-                                <a class="btn btn-primary col-6  text-center rounded text-white dropdown-toggle"  id="dropdownMenuButton" data-bs-toggle="dropdown">
+                                <a class="btn btn-primary col-6  text-center rounded text-white dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown">
                                     Registration
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -61,11 +67,14 @@
                     <div id="enter">
                         <vc:enter-user />
                     </div>
-
                 </div>
             </div>
             @RenderBody()
-
+            <vc:call-window></vc:call-window>
+            <div class="position-fixed call-block">
+                <span class="position-fixed call btn btn-info rounded-circle" id="call">📞</span>
+                <span class="position-fixed btn call-border"></span>
+            </div>
         </main>
     </div>
 
@@ -104,5 +113,22 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $('#send-form').on('click', function() {
+            $.ajax({
+                type: "Post",
+                url: "/Home/NewMessage",
+                data: $("#form-call").serialize(),
+                success: function(result) {
+                    if(result){
+                        $('#call-window').slideToggle();
+                        $('#form-call label input,textarea').val('');
+                    }
+                    console.log(result);
+                }
+            })
+        });
+    </script>
+
 </body>
 </html>

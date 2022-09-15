@@ -16,5 +16,11 @@ $(() => {
         $('#login-registration').fadeOut(1);
         $('#enter').fadeIn();
     });
-    
+    $('#call').on('click', function () {
+        $('#call-window').slideToggle();
+
+    });
+    $('#close-form').on('click', function () {
+        $('#call-window').slideToggle();
+    });
 });
