@@ -1,8 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportSite.Models.Db
 {
+    
     public enum TypeTraining
     {
         [Display(Name = "Group training")]
@@ -10,12 +12,13 @@ namespace SportSite.Models.Db
         [Display(Name = "Individual training")]
         individual_training
     }
-    public class TimeOfWork
+    public class Training
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        [Required]
+        public List<DayofWeekTraining> dayofWeeks { get; set; } = new();
         public TypeTraining training { get; set; }
-        public Trainer Trainer { get; set; }
+        [Required]
+        public Coach? coach { get; set; }
     }
 }

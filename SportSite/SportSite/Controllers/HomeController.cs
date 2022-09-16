@@ -11,14 +11,13 @@ using System.Security.Claims;
 
 namespace SportSite.Controllers
 {
-   
     public class HomeController : Controller
     {
         Db db;
         public HomeController(Db db)
         {
             this.db = db;
-            if (db.TypeSports.Count() < 1)
+            if (db.Services.Count() < 1)
             {
                 db.AddTypeSport();
             }
@@ -60,7 +59,7 @@ namespace SportSite.Controllers
             if (ModelState.IsValid)
             {
                 coach.account.Role = Role.coach;
-                db.Trainers.Add(new Trainer { Account = coach.account, Details= coach.Details });
+                db.Trainers.Add(new Coach { Account = coach.account, Details= coach.Details });
                 db.Code.Remove(db.Code.FirstOrDefault(c => c.Code == coach.CreateCode));
                 db.SaveChanges();
 
@@ -83,9 +82,8 @@ namespace SportSite.Controllers
                 }
                 ViewBag.Message = "Incorrect login and (or) password";
             }
-            return View("Index", db.TypeSports);
+            return View("Index", db.Services);
         }
-
         public JsonResult NewMessage()
         {
             try
@@ -107,16 +105,23 @@ namespace SportSite.Controllers
             return Json(true);
         }
 
+        public IActionResult ViewServicesDetails(string? id)
+        {
+            return View(db.Services.FirstOrDefault(t=>t.Id.ToString()==id));
+        }
 
+        public IActionResult ViewTraning(string? id)
+        {
+            return PartialView();
+        }
 
-
-
+        
 
 
         [Route("")]
         public IActionResult Index()
         {         
-            return View(db.TypeSports);
+            return View(db.Services);
         }
         [Authorize]
         public IActionResult Privacy()

@@ -3,15 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportSite.Models.Db
 {
-    public class Trainer
+    public enum DayofWeek
+    {
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday
+    }
+    public class DayofWeekTraining
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Required]
-        public Account Account { get; set; }
+        public string? Time { get; set; }
         [Required]
-        public string? Details { get; set; }
-        public List<TypeSport>?  typeSports { get; set; }
-        public List<TimeOfWork>? timeOfWorks { get; set; }
+        public DayofWeek? dayofWeek { get; set; }
     }
 }
