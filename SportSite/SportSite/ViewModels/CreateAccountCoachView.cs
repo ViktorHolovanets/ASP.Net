@@ -13,5 +13,7 @@ namespace SportSite.ViewModels
         public Guid CreateCode { get; set; }
         [Required]
         public string? Details { get; set; }
+        [Required]
+        public string? IdService { get; set; }
     }
 }

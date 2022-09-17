@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SportSite.Models;
 using SportSite.Models.Db;
@@ -14,17 +15,20 @@ namespace SportSite.Controllers
     public class HomeController : Controller
     {
         Db db;
-        public HomeController(Db db)
+        private readonly ILogger<HomeController> _logger;
+        public HomeController(Db db, ILogger<HomeController> logger)
         {
             this.db = db;
             if (db.Services.Count() < 1)
             {
                 db.AddTypeSport();
             }
+            _logger = logger;
         }
         [AcceptVerbs("Get", "Post")]
         public IActionResult IsLogin(string login)
         {
+
             return db.Accounts.FirstOrDefault(u => u.Login == login) != null ? Json(false) : Json(true);
         }
         [AcceptVerbs("Get", "Post")]
@@ -51,6 +55,16 @@ namespace SportSite.Controllers
 
         public IActionResult CreateAccountCoach()
         {
+            var tempServices = new List<ClassCoach>();
+            foreach (var item in db.Services.Where(s => s.IsTypeSport))
+            {
+                tempServices.Add(new ClassCoach()
+                {
+                    Id = item.Id,
+                    Name = $"{item.Name}"
+                });
+            }
+            ViewBag.Services = new SelectList(tempServices, "Id", "Name");
             return View();
         }
         [HttpPost]
@@ -59,7 +73,8 @@ namespace SportSite.Controllers
             if (ModelState.IsValid)
             {
                 coach.account.Role = Role.coach;
-                db.Coaches.Add(new Coach { Account = coach.account, Details = coach.Details });
+
+                db.Coaches.Add(new Coach { Account = coach.account, Details = coach.Details, typeSports = db.Services.FirstOrDefault(s => s.Id.ToString() == coach.IdService) });
                 db.Code.Remove(db.Code.FirstOrDefault(c => c.Code == coach.CreateCode));
                 db.SaveChanges();
 
@@ -77,10 +92,15 @@ namespace SportSite.Controllers
                 if (user != null)
                 {
                     await Authenticate(user); // аутентификация
-
+                    _logger.LogInformation($"Enter User: {model.Login}", DateTime.UtcNow.ToLongTimeString());
                     return RedirectToAction("Privacy");
                 }
                 ViewBag.Message = "Incorrect login and (or) password";
+                _logger.LogError($"Incorrect enter", DateTime.UtcNow.ToLongTimeString());
+            }
+            else
+            {
+                _logger.LogWarning($"Invalid enter", DateTime.UtcNow.ToLongTimeString());
             }
             return View("Index", db.Services);
         }
