@@ -5,7 +5,7 @@
 <h2 class="text-center">@Model.Name</h2>
 @if(User.Identity.IsAuthenticated && Model.IsTypeSport)
 {
-    <a class="btn btn-info">Training</a>
+    <a asp-action="ViewCoachOfTrainings" asp-route-id="@Model.Id" class="btn btn-info">Training</a>
 }
 <p>
     <pre class="font-italic font-weight-bold">

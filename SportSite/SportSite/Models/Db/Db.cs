@@ -8,11 +8,11 @@ namespace SportSite.Models.Db
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
         public virtual DbSet<Training> Trainings { get; set; }
-        public virtual DbSet<Coach> Trainers { get; set; }
+        public virtual DbSet<Coach> Coaches { get; set; }
         public virtual DbSet<Services> Services { get; set; }
         public virtual DbSet<CreateCodeAccounts> Code { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
-        public virtual DbSet<DayofWeekTraining> DayofWeekTrainings { get; set; }
+        public virtual DbSet<DayOfWeekTraining> DayofWeekTrainings { get; set; }
         public Db(DbContextOptions<Db> options)
             : base(options)
         {
@@ -125,7 +125,7 @@ namespace SportSite.Models.Db
                 {
                     Age = 1,
                     Email = "asd@asd.com",
-                    Gender = Gender.Man,
+                    Gender = Gender.Male,
                     Name = "test",
                     Surname = "test",
                     Tel = "+3802222"

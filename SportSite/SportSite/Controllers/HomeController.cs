@@ -22,7 +22,7 @@ namespace SportSite.Controllers
                 db.AddTypeSport();
             }
         }
-        [AcceptVerbs("Get", "Post")] 
+        [AcceptVerbs("Get", "Post")]
         public IActionResult IsLogin(string login)
         {
             return db.Accounts.FirstOrDefault(u => u.Login == login) != null ? Json(false) : Json(true);
@@ -33,7 +33,7 @@ namespace SportSite.Controllers
             return db.Code.FirstOrDefault(code => code.Code.ToString() == createcode) == null ? Json(false) : Json(true);
         }
         public IActionResult CreateAccount()
-        {       
+        {
             return View();
         }
         [HttpPost]
@@ -41,10 +41,10 @@ namespace SportSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Clients.Add(new Client { Account=user});
-                db.SaveChanges(); 
+                db.Clients.Add(new Client { Account = user });
+                db.SaveChanges();
 
-                return Login(new EnterUserView() { Login=user.Login, Password=user.Password}).Result;
+                return Login(new EnterUserView() { Login = user.Login, Password = user.Password }).Result;
             }
             return View();
         }
@@ -59,7 +59,7 @@ namespace SportSite.Controllers
             if (ModelState.IsValid)
             {
                 coach.account.Role = Role.coach;
-                db.Trainers.Add(new Coach { Account = coach.account, Details= coach.Details });
+                db.Coaches.Add(new Coach { Account = coach.account, Details = coach.Details });
                 db.Code.Remove(db.Code.FirstOrDefault(c => c.Code == coach.CreateCode));
                 db.SaveChanges();
 
@@ -73,7 +73,7 @@ namespace SportSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                Account user = await db.Accounts.Include(a=>a.Client).FirstOrDefaultAsync(u => u.Login == model.Login && u.Password == model.Password);
+                Account user = await db.Accounts.Include(a => a.Client).FirstOrDefaultAsync(u => u.Login == model.Login && u.Password == model.Password);
                 if (user != null)
                 {
                     await Authenticate(user); // аутентификация
@@ -107,27 +107,33 @@ namespace SportSite.Controllers
 
         public IActionResult ViewServicesDetails(string? id)
         {
-            return View(db.Services.FirstOrDefault(t=>t.Id.ToString()==id));
+            return View(db.Services.FirstOrDefault(t => t.Id.ToString() == id));
         }
 
+        public IActionResult ViewCoachOfTrainings(string? id)
+        {
+            var coaches = db.Coaches.Include(c => c.Account.Client).Where(coach => coach.typeSports.Id.ToString() == id);
+            return View(coaches);
+        }
         public IActionResult ViewTraning(string? id)
         {
-            return PartialView();
+            var trainings = db.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.coach.Id.ToString() == id);
+            return PartialView(trainings);
         }
 
-        
+
 
 
         [Route("")]
         public IActionResult Index()
-        {         
+        {
             return View(db.Services);
         }
         [Authorize]
         public IActionResult Privacy()
         {
             return View();
-                //RedirectToRoute("Account", new { area = "Account", controller = "Home", action = "Index" });
+            //RedirectToRoute("Account", new { area = "Account", controller = "Home", action = "Index" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -148,7 +154,7 @@ namespace SportSite.Controllers
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
-       
+
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

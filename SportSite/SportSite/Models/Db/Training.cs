@@ -8,16 +8,16 @@ namespace SportSite.Models.Db
     public enum TypeTraining
     {
         [Display(Name = "Group training")]
-        group_training,
+        Group,
         [Display(Name = "Individual training")]
-        individual_training
+        Individual
     }
     public class Training
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public List<DayofWeekTraining> dayofWeeks { get; set; } = new();
-        public TypeTraining training { get; set; }
+        public List<DayOfWeekTraining> dayofWeeks { get; set; } = new();
+        public TypeTraining training { get; set; }=TypeTraining.Group;
         [Required]
         public Coach? coach { get; set; }
     }

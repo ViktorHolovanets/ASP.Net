@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SportSite.Areas.Edit.ViewModels;
+using SportSite.Models;
 using SportSite.Models.Db;
 
 namespace SportSite.Areas.Edit.Controllers
@@ -16,7 +18,7 @@ namespace SportSite.Areas.Edit.Controllers
         {
             _context = context;
         }
-        private Account GetAccount(string? id=null)
+        private Account GetAccount(string? id = null)
         {
             return _context.Accounts?.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity.Name);
         }
@@ -41,7 +43,7 @@ namespace SportSite.Areas.Edit.Controllers
         // GET: HomeController/Edit/5
         public ActionResult Edit(string? id)
         {
-            return View(_context.GetUser(id)?? GetAccount(id).Client);
+            return View(_context.GetUser(id) ?? GetAccount(id).Client);
         }
 
         // POST: HomeController/Edit/5
@@ -78,7 +80,7 @@ namespace SportSite.Areas.Edit.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var account =GetAccount();
+                    var account = GetAccount();
                     account.Password = newpassword.Password;
                     await _context.SaveChangesAsync();
                 }
@@ -96,19 +98,19 @@ namespace SportSite.Areas.Edit.Controllers
         }
         [HttpGet]
         [Route("ViewUser")]
-        public IActionResult ViewUsers(Role? role=Role.client)
+        public IActionResult ViewUsers(Role? role = Role.client)
         {
-            var getlist = (from cl in _context.Accounts 
-                           where cl.Role==role
+            var getlist = (from cl in _context.Accounts
+                           where cl.Role == role
                            select cl.Client).ToList();
             return PartialView(getlist);
         }
         public IActionResult ViewCode()
         {
-            var account=GetAccount();
+            var account = GetAccount();
             return PartialView(_context.Code.Where(c => c.Сreator == account.Id));
         }
-       
+
         public IActionResult CreateCode()
         {
             _context.Code.Add(new CreateCodeAccounts()
@@ -120,7 +122,14 @@ namespace SportSite.Areas.Edit.Controllers
             var account = GetAccount();
             return PartialView("Viewcode", _context.Code.Where(c => c.Сreator == account.Id));
         }
-        public ActionResult Delete(string? id)
+        public IActionResult DeleteCode(string? id)
+        {
+            _context.Code.Remove(_context.Code.FirstOrDefault(a => a.Id.ToString() == id));
+            _context.SaveChanges();
+            var account = GetAccount();
+            return View("ViewProfileManager");
+        }
+        public IActionResult Delete(string? id)
         {
             try
             {
@@ -132,6 +141,43 @@ namespace SportSite.Areas.Edit.Controllers
                 return View("ViewProfileManager");
             }
             return View("ViewProfileManager");
+        }
+        //
+        public IActionResult CreateTraining()
+        {
+            var tempCoaches = new List<ClassCoach>();
+            foreach (var item in _context.Coaches.Include(c=>c.Account.Client))
+            {
+                tempCoaches.Add(new ClassCoach()
+                {
+                    Id = item.Id,
+                    Name=$"{item.Account.Client.Name} {item.Account.Client.Surname}"
+                });
+            }
+            ViewBag.Coaches = new SelectList(tempCoaches, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CreateTraining(ViewCreateTraining viewCreateTraining)
+        {
+            List<DayOfWeekTraining> dayOfWeekTrainings = new List<DayOfWeekTraining>();
+            var c = _context.Coaches.FirstOrDefault(c => c.Id == viewCreateTraining.IdCoach);
+            foreach (var item in viewCreateTraining.dayofWeeks)
+            {
+                dayOfWeekTrainings.Add(new DayOfWeekTraining()
+                {
+                    dayofWeek = item,
+                    Time = viewCreateTraining.Time
+                });
+            }
+            _context.Trainings.Add(new Training()
+            {
+                coach = _context.Coaches.FirstOrDefault(c => c.Id == viewCreateTraining.IdCoach),
+                training = viewCreateTraining.typeTraining,
+                dayofWeeks = dayOfWeekTrainings
+            });
+            _context.SaveChanges();
+            return View();
         }
     }
 }

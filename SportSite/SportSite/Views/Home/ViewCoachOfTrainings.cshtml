@@ -1,13 +1,12 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@model List<Coach>
-<h2>@Model[0]?.typeSports?.Name</h2>
+@model IEnumerable<Coach>
 <div class="row">
     <div class="col-3 bg">
         @foreach (var item in Model)
         {
-            <button data-id="@item.Id" class="btn btn-success text-info font-weight-bold btn-ajax">@item.Account?.Client?.Name @item.Account?.Client?.Surname</button>
+            <button data-url='@Url.Action("ViewTraning", new{id=item.Id})' class="btn btn-success text-info font-weight-bold btn-ajax w-100">@item.Account?.Client?.Name @item.Account?.Client?.Surname</button>
         }
     </div>
     <div class="col-9">
@@ -20,7 +19,8 @@
     <script>
      
         $('.btn-ajax').on('click', function() {
-            GetList("@Url.Action("CreateCode")");
+            console.log($(this).data("url"))
+            GetList($(this).data("url"));
         });
         function GetList(url) {
             $.ajax({

@@ -7,11 +7,11 @@ namespace SportSite.Models.Db
 {
     public enum Gender
     {
-        Man,
-        Woman,
+        Male,
+        Female,
         Other
     }
-   
+
     public class User
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

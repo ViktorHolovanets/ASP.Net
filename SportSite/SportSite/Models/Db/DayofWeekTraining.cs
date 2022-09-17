@@ -13,7 +13,7 @@ namespace SportSite.Models.Db
         Saturday,
         Sunday
     }
-    public class DayofWeekTraining
+    public class DayOfWeekTraining
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
