@@ -1,6 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@model User
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-transparent border-bottom box-shadow mb-3">
     <div class="container-fluid">
         <div class="navbar-collapse collapse">
@@ -21,13 +22,22 @@
                     <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-code" value="View Code" />
                     <input type="button" class="btn btn-success text-white font-weight-bold font-italic" id="create-code" value="Create Code" />
                 </li>
+                <li class="nav-item m-1">
+                    <button type="button" class="btn btn-primary position-relative" id="get-message">
+                        Message
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            @ViewBag.UnreadMessage
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="row">
     <div class="col-3 bg-secondary">
-        @await Html.PartialAsync("DetailsUser")
+        @await Html.PartialAsync("DetailsUser", Model)
     </div>
     <div class="col-9">
         <div id="res" class="bg-white"></div>
@@ -53,6 +63,9 @@
         $('#create-code').on('click', function() {
             GetList("@Url.Action("CreateCode")");
         });
+        $('#get-message').on('click', function() {
+            GetList("@Url.Action("GetMessage")");
+        });
         function GetList(url) {
             $.ajax({
                 type: "Get",
@@ -63,5 +76,14 @@
                 }
             })
         }
+        function ClickMessage(e){
+            console.log(e.target.dataset.url);
+            var btn = $(e.target);
+            btn.removeClass("bg-success");
+        }
+        $('.btn-read-message').on('click', function() {
+            let url = $(this).data("url");
+            console.log(url);
+        });
     </script>
 }

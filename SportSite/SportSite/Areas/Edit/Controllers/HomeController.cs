@@ -21,6 +21,9 @@ namespace SportSite.Areas.Edit.Controllers
         private Account GetAccount(string? id = null)
         {
             return _context.Accounts?.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity.Name);
+        }public int UnreadMessage()
+        {
+            return _context.Messages.Where(m => !m.IsRead).Count();
         }
         [AcceptVerbs("Get", "Post")]
         public IActionResult IncorrectPassword(string oldpassword)
@@ -94,7 +97,8 @@ namespace SportSite.Areas.Edit.Controllers
         [Authorize(Roles = "manager")]
         public ActionResult ViewProfileManager()
         {
-            return View();
+            ViewBag.UnreadMessage = UnreadMessage();
+            return View(GetAccount().Client);
         }
         [HttpGet]
         [Route("ViewUser")]
@@ -178,6 +182,10 @@ namespace SportSite.Areas.Edit.Controllers
             });
             _context.SaveChanges();
             return View();
+        }
+        public IActionResult GetMessage()
+        {
+            return PartialView(_context.Messages);
         }
     }
 }
