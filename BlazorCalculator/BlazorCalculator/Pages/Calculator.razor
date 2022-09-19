@@ -1,5 +1,4 @@
 ﻿@page "/calculator"
-@using BlazorCalculator.Component
 <h3>Calculator</h3>
 <div class="row justify-content-center">
     <div class="col-12 col-md-12 col-lg-10 col-xl-6 col-xxl-4 border border-info rounded-1">
@@ -83,7 +82,7 @@
     }
     void WriteSymbolOperation(char i)
     {
-        if (!IsOne || NumberOne == "")
+        if (!IsOne || NumberOne == null)
         {
             Result();
             NumberOne = result.ToString();
