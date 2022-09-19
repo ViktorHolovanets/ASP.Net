@@ -25,7 +25,7 @@
                 <li class="nav-item m-1">
                     <button type="button" class="btn btn-primary position-relative" id="get-message">
                         Message
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="num-message">
                             @ViewBag.UnreadMessage
                             <span class="visually-hidden">unread messages</span>
                         </span>
@@ -76,10 +76,22 @@
                 }
             })
         }
-        function ClickMessage(e){
-            console.log(e.target.dataset.url);
-            var btn = $(e.target);
-            btn.removeClass("bg-success");
+        function ClickMessage(e) {
+            let btn = e.target
+            let url = btn.dataset.url;
+            btn.dataset.url = "";
+            btn.classList.remove("bg-success")
+            console.log(url);
+            if (url != "")
+                $.ajax({
+                    type: "Get",
+                    url: url,
+                    success: function(result) {
+                        console.log(@ViewBag.UnreadMessage);
+                        console.log(result);
+                        $('#num-message').html(result)
+                    }
+                })
         }
         $('.btn-read-message').on('click', function() {
             let url = $(this).data("url");

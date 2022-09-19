@@ -20,5 +20,6 @@ namespace SportSite.Models.Db
         public TypeTraining training { get; set; }=TypeTraining.Group;
         [Required]
         public Coach? coach { get; set; }
+        public Client? Client { get; set; }
     }
 }

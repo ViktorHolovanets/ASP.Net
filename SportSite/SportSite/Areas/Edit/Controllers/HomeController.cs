@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SportSite.Areas.Edit.ViewModels;
 using SportSite.Models;
 using SportSite.Models.Db;
+using System.Linq;
 
 namespace SportSite.Areas.Edit.Controllers
 {
@@ -185,7 +186,37 @@ namespace SportSite.Areas.Edit.Controllers
         }
         public IActionResult GetMessage()
         {
-            return PartialView(_context.Messages);
+            return PartialView(_context.Messages.OrderBy(m=>m.IsRead));
+        }
+        
+        public IActionResult ReadMessage(string? id)
+        {
+            var message = _context.Messages.FirstOrDefault(m => m.Id.ToString() == id && !m.IsRead);
+            if(message != null)
+            {
+                message.IsRead = true;
+                _context.SaveChanges();
+                ViewBag.UnreadMessage = UnreadMessage();
+                return Json(UnreadMessage());
+            }
+            return Json(false);
+        }
+        [Authorize(Roles = "client")]
+        public IActionResult ViewProfileClient()
+        {
+            return View(GetAccount().Client);
+        }
+        [Authorize(Roles = "client")]
+        public IActionResult ViewClientTraining()
+        {
+            var account = GetAccount();
+            var client = _context.Clients.FirstOrDefault(c => c.Account.Id == account.Id);
+            var trainings = _context.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.Client.Id == client.Id);
+            if (trainings != null && trainings.Count()>0)
+            {
+                return PartialView("/Views/Home/ViewTraning.cshtml", trainings);
+            }
+            return Json("Can't find workouts");
         }
     }
 }

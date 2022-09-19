@@ -1,0 +1,134 @@
+﻿@page "/calculator"
+@using BlazorCalculator.Component
+<h3>Calculator</h3>
+<div class="row justify-content-center">
+    <div class="col-12 col-md-12 col-lg-10 col-xl-6 col-xxl-4 border border-info rounded-1">
+        <div class="row">
+            <p style="min-height:24px;">@NumberOne</p>
+            <p style="min-height:24px;">@SymbolOperation</p>
+            <p style="min-height:24px;">@NumberTwo</p>
+            <p style="min-height:24px;">Result: @(result??0)</p>
+        </div>
+        <div class="row">
+
+            <button class="btn btn-warning col" @onclick="@(() =>AC())">AC</button>
+
+            <button class="btn btn-warning col" @onclick="@(() =>Del())">Del</button>
+
+            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('%'))">%</button>
+
+            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('/'))">/</button>
+
+        </div>
+        <div class="row">
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("7"))">7</button>
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("8"))">8</button>
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("9"))">9</button>
+
+            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('*'))">*</button>
+
+        </div>
+        <div class="row">
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("4"))">4</button>
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("5"))">5</button>
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("6"))">6</button>
+
+            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('-'))">-</button>
+
+        </div>
+        <div class="row">
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("1"))">1</button>
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("2"))">2</button>
+
+            <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("3"))">3</button>
+
+            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('+'))">+</button>
+
+        </div>
+        <div class="row justify-content-end">
+
+
+            <button class="btn btn-outline-success col-3" @onclick="@(() =>WriteNum("0"))">0</button>
+
+            <button class="btn btn-warning col-3" @onclick="@(() =>Result())">=</button>
+
+        </div>
+
+    </div>
+</div>
+@code {
+    string? NumberOne = null;
+    string? NumberTwo = null;
+    char? SymbolOperation = null;
+    float? result = null;
+    bool IsOne = true;
+
+    void WriteNum(string i)
+    {
+        if (IsOne)
+        {
+            NumberOne += i;
+            result = null;
+        }
+        else
+            NumberTwo += i;
+    }
+    void WriteSymbolOperation(char i)
+    {
+        if (!IsOne || NumberOne == "")
+        {
+            Result();
+            NumberOne = result.ToString();
+            result = null;
+        }
+        SymbolOperation = i;
+        IsOne = false;
+    }
+    void AC()
+    {
+        NumberOne = null;
+        NumberTwo = null;
+        IsOne = true;
+        SymbolOperation = null;
+    }
+    void Del()
+    {
+        if (IsOne)
+            NumberOne = NumberOne?.Remove(NumberOne.Length - 1);
+        else
+            NumberTwo = NumberTwo?.Remove(NumberTwo.Length - 1);
+    }
+    void Result()
+    {
+        if (NumberOne != "" && NumberTwo != "")
+        {
+            switch (SymbolOperation)
+            {
+                case '+':
+                    result = float.Parse(NumberOne) + float.Parse(NumberTwo);
+                    break;
+                case '-':
+                    result = float.Parse(NumberOne) - float.Parse(NumberTwo);
+                    break;
+                case '*':
+                    result = float.Parse(NumberOne) * float.Parse(NumberTwo);
+                    break;
+                case '/':
+                    result = float.Parse(NumberOne) / float.Parse(NumberTwo);
+                    break;
+                case '%':
+                    result = (float.Parse(NumberOne) / 100) * float.Parse(NumberTwo);
+                    break;
+            }
+        }
+        AC();
+    }
+}

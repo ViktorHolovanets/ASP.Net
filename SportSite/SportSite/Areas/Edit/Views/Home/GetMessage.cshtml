@@ -12,7 +12,7 @@
     {
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-heading-@n">
-                <button class="accordion-button collapsed @(item.IsRead?"bg-white":"bg-success") btn-read-message" 
+                <button class="accordion-button collapsed @(item.IsRead?"bg-white":"bg-secondary") btn-read-message" 
                 onclick="ClickMessage(event)"
                 data-url='@(item.IsRead?"":@Url.Action("ReadMessage", new{id=item.Id}))' type="button" 
                 data-bs-toggle="collapse" data-bs-target="#flush-collapse-@n" aria-expanded="false" aria-controls="flush-collapse-@n">

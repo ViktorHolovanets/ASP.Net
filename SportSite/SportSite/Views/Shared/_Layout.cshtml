@@ -70,11 +70,15 @@
                 </div>
             </div>
             @RenderBody()
-            <vc:call-window></vc:call-window>
-            <div class="position-fixed call-block">
-                <span class="position-fixed call btn btn-info rounded-circle" id="call">📞</span>
-                <span class="position-fixed btn call-border"></span>
-            </div>
+            @if (!User.Identity.IsAuthenticated||User.IsInRole("client")) 
+            {
+                <vc:call-window></vc:call-window>
+                <div class="position-fixed call-block">
+                    <span class="position-fixed call btn btn-info rounded-circle" id="call">📞</span>
+                    <span class="position-fixed btn call-border"></span>
+                </div>
+            }
+
         </main>
     </div>
 
@@ -120,7 +124,7 @@
                 url: "/Home/NewMessage",
                 data: $("#form-call").serialize(),
                 success: function(result) {
-                    if(result){
+                    if (result) {
                         $('#call-window').slideToggle();
                         $('#form-call label input,textarea').val('');
                     }

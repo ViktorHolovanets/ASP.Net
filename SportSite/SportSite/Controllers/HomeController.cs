@@ -140,7 +140,11 @@ namespace SportSite.Controllers
             var trainings = db.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.coach.Id.ToString() == id);
             return PartialView(trainings);
         }
-
+        
+        public IActionResult ViewTraning(IEnumerable<Training> trainings)
+        {
+            return PartialView(trainings);
+        }
 
 
 
