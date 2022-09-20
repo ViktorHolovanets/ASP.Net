@@ -5,13 +5,21 @@
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-3 bg-light text-black">
+        <div class="col-3 bg-light text-black p-2">
             @item.training<hr />
             @foreach (var day in item.dayofWeeks)
             {
                 <p>@day.dayofWeek @day.Time</p>
             }
+            @if (User.IsInRole("client")&&ViewBag.Add)
+            {
+                <input type="button" class="btn btn-outline-danger" value="Add" data-url='@Url.Action("AddClientTraining", new{id=@item.Id})'onclick="AddTraining(event)"/>
+
+            }
+            else
+            {
+                <input type="button" class="btn btn-outline-warning" value="Delete" data-url='@Url.Action("AddClientTraining", new{id=@item.Id})'onclick="AddTraining(event)"/>
+            }
         </div>
     }
 </div>
-

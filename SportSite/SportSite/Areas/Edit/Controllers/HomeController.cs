@@ -22,7 +22,8 @@ namespace SportSite.Areas.Edit.Controllers
         private Account GetAccount(string? id = null)
         {
             return _context.Accounts?.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity.Name);
-        }public int UnreadMessage()
+        }
+        public int UnreadMessage()
         {
             return _context.Messages.Where(m => !m.IsRead).Count();
         }
@@ -95,7 +96,7 @@ namespace SportSite.Areas.Edit.Controllers
                 return View("DetailsUser");
             }
         }
-        [Authorize(Roles = "manager")]
+
         public ActionResult ViewProfileManager()
         {
             ViewBag.UnreadMessage = UnreadMessage();
@@ -129,8 +130,12 @@ namespace SportSite.Areas.Edit.Controllers
         }
         public IActionResult DeleteCode(string? id)
         {
-            _context.Code.Remove(_context.Code.FirstOrDefault(a => a.Id.ToString() == id));
-            _context.SaveChanges();
+            var code = _context.Code.FirstOrDefault(a => a.Id.ToString() == id);
+            if (code != null)
+            {
+                _context.Code.Remove(code);
+                _context.SaveChanges();
+            }
             var account = GetAccount();
             return View("ViewProfileManager");
         }
@@ -138,8 +143,13 @@ namespace SportSite.Areas.Edit.Controllers
         {
             try
             {
-                _context.Accounts.Remove(_context.Accounts.FirstOrDefault(a => a.Client.Id.ToString() == id));
-                _context.SaveChanges();
+                var account = _context.Accounts.FirstOrDefault(a => a.Client.Id.ToString() == id);
+                if (account != null)
+                {
+                    _context.Accounts.Remove(account);
+                    _context.SaveChanges();
+                }
+
             }
             catch
             {
@@ -151,12 +161,12 @@ namespace SportSite.Areas.Edit.Controllers
         public IActionResult CreateTraining()
         {
             var tempCoaches = new List<ClassCoach>();
-            foreach (var item in _context.Coaches.Include(c=>c.Account.Client))
+            foreach (var item in _context.Coaches.Include(c => c.Account.Client))
             {
                 tempCoaches.Add(new ClassCoach()
                 {
                     Id = item.Id,
-                    Name=$"{item.Account.Client.Name} {item.Account.Client.Surname}"
+                    Name = $"{item.Account.Client.Name} {item.Account.Client.Surname}"
                 });
             }
             ViewBag.Coaches = new SelectList(tempCoaches, "Id", "Name");
@@ -186,13 +196,13 @@ namespace SportSite.Areas.Edit.Controllers
         }
         public IActionResult GetMessage()
         {
-            return PartialView(_context.Messages.OrderBy(m=>m.IsRead));
+            return PartialView(_context.Messages.OrderBy(m => m.IsRead));
         }
-        
+
         public IActionResult ReadMessage(string? id)
         {
             var message = _context.Messages.FirstOrDefault(m => m.Id.ToString() == id && !m.IsRead);
-            if(message != null)
+            if (message != null)
             {
                 message.IsRead = true;
                 _context.SaveChanges();
@@ -207,12 +217,13 @@ namespace SportSite.Areas.Edit.Controllers
             return View(GetAccount().Client);
         }
         [Authorize(Roles = "client")]
-        public IActionResult ViewClientTraining()
+        public IActionResult ViewClientTraining(bool IsView=true)
         {
+            ViewBag.Add = IsView;
             var account = GetAccount();
             var client = _context.Clients.FirstOrDefault(c => c.Account.Id == account.Id);
             var trainings = _context.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.Client.Id == client.Id);
-            if (trainings != null && trainings.Count()>0)
+            if (trainings != null && trainings.Count() > 0)
             {
                 return PartialView("/Views/Home/ViewTraning.cshtml", trainings);
             }

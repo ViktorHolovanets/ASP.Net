@@ -1,25 +1,11 @@
 ﻿@model User
 
 <div class="row">
-    <div class="col-3 bg-secondary">
-        @await Html.PartialAsync("DetailsUser")
-    </div>
-    <div class="col-9">
-        <h2 class="text-center">My training</h2>
-        <div id="res"></div>
+    <div class="col-12">
+        <h2 class="text-center text-black">My training</h2>
+        <div id="result" class="container"></div>
     </div>
 </div>
 @section Scripts{
-    <script>
-        $(() => {
-            $.ajax({
-                type: "Get",
-                url: '@Url.Action("ViewClientTraining")',
-                success: function(result) {
-                    $('#res').html(result)
-                    console.log(result);
-                }
-            });
-        });
-    </script>
+    
 }

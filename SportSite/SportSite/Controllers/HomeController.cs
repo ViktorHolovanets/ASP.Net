@@ -137,14 +137,14 @@ namespace SportSite.Controllers
         }
         public IActionResult ViewTraning(string? id)
         {
-            var trainings = db.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.coach.Id.ToString() == id);
+            var trainings = db.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.coach.Id.ToString() == id&& tr.Client.Account.Login!= User.Identity.Name);
             return PartialView(trainings);
         }
         
-        public IActionResult ViewTraning(IEnumerable<Training> trainings)
-        {
-            return PartialView(trainings);
-        }
+        //public IActionResult ViewTraning(IEnumerable<Training> trainings)
+        //{
+        //    return PartialView(trainings);
+        //}
 
 
 
@@ -183,6 +183,21 @@ namespace SportSite.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index");
+        }
+        public IActionResult AddClientTraining(string id)
+        {
+            var client = db.Clients.FirstOrDefault(c => c.Account.Login == User.Identity.Name);
+            if(client != null)
+            {
+                var training= db.Trainings.FirstOrDefault(tr=>tr.Id.ToString()==id);
+                if(training != null)
+                {
+                    training.Client = client;
+                    db.SaveChanges();
+                    return Json(true);
+                }
+            }
+            return Json(false);
         }
     }
 }
