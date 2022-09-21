@@ -18,8 +18,8 @@ namespace SportSite.Models.Db
         public Guid Id { get; set; }
         public List<DayOfWeekTraining> dayofWeeks { get; set; } = new();
         public TypeTraining training { get; set; }=TypeTraining.Group;
-        [Required]
         public Coach? coach { get; set; }
-        public Client? Client { get; set; }
+        [Required]
+        public List<Client> Clients { get; set; } = new();
     }
 }

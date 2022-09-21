@@ -18,7 +18,7 @@
             }
             else
             {
-                <input type="button" class="btn btn-outline-warning" value="Delete" data-url='@Url.Action("AddClientTraining", new{id=@item.Id})'onclick="AddTraining(event)"/>
+                <a class="btn btn-outline-warning" href="#" data-url='@Url.Action("DeleteClientTraining", new{id=@item.Id})' onclick="AddTraining(event)">Delete</a>
             }
         </div>
     }

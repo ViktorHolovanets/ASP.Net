@@ -2,7 +2,7 @@
 
 namespace SportSite.Models.Db
 {
-    public class Db:DbContext
+    public class Db : DbContext
     {
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Account> Accounts { get; set; }
@@ -18,16 +18,17 @@ namespace SportSite.Models.Db
         {
             Database.EnsureCreated();
         }
+        
         public User GetUser(string Id)
         {
             return Users.FirstOrDefault(x => x.Id.ToString() == Id);
         }
         public void AddTypeSport()
         {
-            var service=new Services()
+            var service = new Services()
             {
                 Name = "CrossFit",
-                IsTypeSport=true,
+                IsTypeSport = true,
                 Details = @"
                     <h2>What is CrossFit?</h2>
                     A form of high intensity interval training,
@@ -45,9 +46,9 @@ namespace SportSite.Models.Db
                     on their website(which is always free), along with a guide to all the specialized lingo that is used.There is also a substitutions section on their FAQ page that suggests 
                     places to find level appropriate workouts. “CrossFit is universally scalable and modifiable for all fitness levels, so it can be tailored to meet your goals and current
                     fitness level,” says Tracey Magee, owner and head coach of CrossFit Clan Performance Center.",
-                Image="/Images/1.jpg"
+                Image = "/Images/1.jpg"
             };
-           var service2=new Services()
+            var service2 = new Services()
             {
                 Name = "Yoga",
                 IsTypeSport = true,
@@ -65,7 +66,7 @@ namespace SportSite.Models.Db
                     as a means of altering energy or shifting consciousness.",
                 Image = "/Images/woman-yoga.jpg"
             };
-            var service3=new Services()
+            var service3 = new Services()
             {
                 Name = "GYM",
                 IsTypeSport = true,
@@ -134,9 +135,9 @@ namespace SportSite.Models.Db
                     Surname = "test",
                     Tel = "+3802222"
                 },
-                Login= "manager",
-                Password= "manager",
-                Role=Role.manager
+                Login = "manager",
+                Password = "manager",
+                Role = Role.manager
             });
             Coaches.Add(new Coach()
             {
@@ -156,7 +157,7 @@ namespace SportSite.Models.Db
                     Role = Role.coach
                 },
                 typeSports = service,
-                Details= @"Certified CrossFit Level 1 Trainer (СF-L1) Champion of Ukraine in powerlifting in 2013 in the 52.5 kg category"
+                Details = @"Certified CrossFit Level 1 Trainer (СF-L1) Champion of Ukraine in powerlifting in 2013 in the 52.5 kg category"
             });
             Coaches.Add(new Coach()
             {

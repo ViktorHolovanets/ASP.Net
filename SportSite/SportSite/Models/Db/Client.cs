@@ -8,6 +8,7 @@ namespace SportSite.Models.Db
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public Account Account { get; set; }
+        [Required]
         public List<Training> trainings { get; set; } = new();
     }
 }

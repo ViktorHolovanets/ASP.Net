@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using SportSite.Areas.Edit.ViewModels;
 using SportSite.Models;
@@ -97,10 +98,18 @@ namespace SportSite.Areas.Edit.Controllers
             }
         }
 
-        public ActionResult ViewProfileManager()
+        public ActionResult ViewProfile()
         {
-            ViewBag.UnreadMessage = UnreadMessage();
-            return View(GetAccount().Client);
+            try
+            {
+                ViewBag.UnreadMessage = UnreadMessage();
+                return View(GetAccount()?.Client);
+            }
+            catch (Exception)
+            {
+                return View("/Views/Home/Logout");
+            }
+            
         }
         [HttpGet]
         [Route("ViewUser")]
@@ -192,7 +201,7 @@ namespace SportSite.Areas.Edit.Controllers
                 dayofWeeks = dayOfWeekTrainings
             });
             _context.SaveChanges();
-            return View();
+            return CreateTraining();
         }
         public IActionResult GetMessage()
         {
@@ -221,13 +230,48 @@ namespace SportSite.Areas.Edit.Controllers
         {
             ViewBag.Add = IsView;
             var account = GetAccount();
+            if (account == null)
+            {
+                return View("/Views/Home/Logout");
+            }
             var client = _context.Clients.FirstOrDefault(c => c.Account.Id == account.Id);
-            var trainings = _context.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.Client.Id == client.Id);
+            var trainings = _context.Trainings.Include(tr => tr.dayofWeeks). Where(tr => tr.Clients.Where(cl=>cl.Id == client.Id).Count()>0).ToList();
             if (trainings != null && trainings.Count() > 0)
             {
                 return PartialView("/Views/Home/ViewTraning.cshtml", trainings);
             }
             return Json("Can't find workouts");
         }
+        public IActionResult DeleteClientTraining(string id)
+        {
+            var client = _context.Clients.Include(cl=>cl.trainings).FirstOrDefault(c => c.Account.Login == User.Identity.Name);
+            if (client != null)
+            {
+                var training = _context.Trainings.FirstOrDefault(tr => tr.Id.ToString() == id);
+                if (training != null)
+                {
+                    client.trainings.Remove(training);
+                    _context.SaveChanges();
+                    return ViewClientTraining(false);
+                }
+            }
+            return Json(false);
+        }
+        public IActionResult ProfileCoach()
+        {
+            var coach = _context.Coaches.Include(c=>c.Account).FirstOrDefault(c => c.Account.Login == User.Identity!.Name);
+            if(coach!= null)
+            {
+                var training = _context.Trainings
+                    .Include(tr=>tr.Clients)
+                    .ThenInclude(cl=>cl.Account)
+                    .ThenInclude(a=>a.Client)
+                    .Include(tr=>tr.dayofWeeks)
+                    .Where(tr => tr.coach!.Id == coach.Id);
+                return PartialView(training);
+            }
+            return PartialView();
+        }
+        
     }
 }

@@ -31,11 +31,20 @@
                         <li class="nav-item m-1">
                             <a class="nav-link text-info font-weight-bold font-italic " href="#footer">Contact</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <form asp-action="Logout" asp-area="" asp-controller="Home" class=" text-info font-weight-bold font-italic">
+                                    <input type="submit" value="Exit" class="btn btn-outline-danger" />
+                                </form>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a id="user" class="nav-link text-info font-weight-bold font-italic" href="/Home/Privacy" onclick="return @User.Identity?.IsAuthenticated.ToString().ToLower()">
+                            <a id="user" class="nav-link text-info font-weight-bold font-italic" href="/Edit/Home/ViewProfile" onclick="return @User.Identity?.IsAuthenticated.ToString().ToLower()">
                                 <img src="~/Images/user.ico" id="profile" />
                             </a>
                         </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -70,7 +79,7 @@
                 </div>
             </div>
             @RenderBody()
-            @if (!User.Identity.IsAuthenticated||User.IsInRole("client")) 
+            @if (!User.Identity.IsAuthenticated || User.IsInRole("client"))
             {
                 <vc:call-window></vc:call-window>
                 <div class="position-fixed call-block">
@@ -118,12 +127,12 @@
 
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-        $('#send-form').on('click', function() {
+        $('#send-form').on('click', function () {
             $.ajax({
                 type: "Post",
                 url: "/Home/NewMessage",
                 data: $("#form-call").serialize(),
-                success: function(result) {
+                success: function (result) {
                     if (result) {
                         $('#call-window').slideToggle();
                         $('#form-call label input,textarea').val('');

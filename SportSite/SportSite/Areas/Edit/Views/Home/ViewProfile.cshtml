@@ -38,6 +38,9 @@
                             </span>
                         </button>
                     </li>
+                    <li class="nav-item m-1">
+                        <a class="btn btn-primary text-white font-weight-bold font-italic" asp-action="CreateTraining">Create training</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -54,6 +57,10 @@
             {
                 {await Html.RenderPartialAsync("ViewProfileClient");}
             }
+            else if (User.IsInRole("coach"))
+            {
+                { await Html.RenderPartialAsync("ViewProfileClient"); }
+            }
         </div>
     </div>
 </div>
@@ -66,12 +73,29 @@
                 type: "Get",
                 url: '@Url.Action("ViewClientTraining", new{IsView=false})',
                 success: function(result) {
-                    $('#result').html(result)
-                    console.log(result);
+                    $('#result').html(result);
                 }
             });
         });
     </script>
+    }
+    else if (User.IsInRole("coach"))
+    {
+        <script>
+            $(() => {
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("ProfileCoach")',
+                    success: function (result) {
+                        $('#result').html(result)
+                        $('.trainings').on('click',function(){
+                            $(this).find('.view-clients').toggleClass('d-none');
+                            $(this).find('.view-traing').toggleClass('d-none');
+                        })
+                    }
+                });
+            });
+        </script>
     }
     <script>
         
@@ -110,7 +134,7 @@
             let btn = e.target
             let url = btn.dataset.url;
             btn.dataset.url = "";
-            btn.classList.remove("bg-success")
+            btn.classList.remove("bg-secondary")
             console.log(url);
             if (url != "")
                 $.ajax({
@@ -120,6 +144,19 @@
                         console.log(@ViewBag.UnreadMessage);
                         console.log(result);
                         $('#num-message').html(result)
+                    }
+                })
+        }
+        function AddTraining(e) {
+            let btn = e.target
+            let url = btn.dataset.url;
+            btn.dataset.url = "";
+            if (url != "")
+                $.ajax({
+                    type: "Get",
+                    url: url,
+                    success: function (result) {
+                        $('#result').html(result)
                     }
                 })
         }

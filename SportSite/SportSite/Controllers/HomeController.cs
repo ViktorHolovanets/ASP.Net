@@ -93,7 +93,7 @@ namespace SportSite.Controllers
                 {
                     await Authenticate(user); // аутентификация
                     _logger.LogInformation($"Enter User: {model.Login}", DateTime.UtcNow.ToLongTimeString());
-                    return RedirectToAction("Privacy");
+                    return RedirectToRoute("areas", new { area = "Edit", controller = "Home", action = "ViewProfile" });
                 }
                 ViewBag.Message = "Incorrect login and (or) password";
                 _logger.LogError($"Incorrect enter", DateTime.UtcNow.ToLongTimeString());
@@ -137,17 +137,10 @@ namespace SportSite.Controllers
         }
         public IActionResult ViewTraning(string? id)
         {
-            var trainings = db.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.coach.Id.ToString() == id&& tr.Client.Account.Login!= User.Identity.Name);
+            ViewBag.Add = true;
+            var trainings = db.Trainings.Include(tr => tr.dayofWeeks).Where(tr => tr.coach.Id.ToString() == id && tr.Clients.FirstOrDefault(cl=>cl.Account.Login == User.Identity.Name)==null).ToList();
             return PartialView(trainings);
         }
-        
-        //public IActionResult ViewTraning(IEnumerable<Training> trainings)
-        //{
-        //    return PartialView(trainings);
-        //}
-
-
-
         [Route("")]
         public IActionResult Index()
         {
@@ -192,7 +185,7 @@ namespace SportSite.Controllers
                 var training= db.Trainings.FirstOrDefault(tr=>tr.Id.ToString()==id);
                 if(training != null)
                 {
-                    training.Client = client;
+                    training.Clients.Add(client);
                     db.SaveChanges();
                     return Json(true);
                 }
