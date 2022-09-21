@@ -10,13 +10,13 @@
         </div>
         <div class="row">
 
-            <button class="btn btn-warning col" @onclick="@(() =>AC())">AC</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>AC())">AC</button>
 
-            <button class="btn btn-warning col" @onclick="@(() =>Del())">Del</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>Del())">Del</button>
 
-            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('%'))">%</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>WriteSymbolOperation('%'))">%</button>
 
-            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('/'))">/</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>WriteSymbolOperation('/'))">/</button>
 
         </div>
         <div class="row">
@@ -27,7 +27,7 @@
 
             <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("9"))">9</button>
 
-            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('*'))">*</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>WriteSymbolOperation('*'))">*</button>
 
         </div>
         <div class="row">
@@ -38,7 +38,7 @@
 
             <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("6"))">6</button>
 
-            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('-'))">-</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>WriteSymbolOperation('-'))">-</button>
 
         </div>
         <div class="row">
@@ -49,7 +49,7 @@
 
             <button class="btn btn-outline-success col" @onclick="@(() =>WriteNum("3"))">3</button>
 
-            <button class="btn btn-warning col" @onclick="@(() =>WriteSymbolOperation('+'))">+</button>
+            <button class="btn btn-outline-warning col" @onclick="@(() =>WriteSymbolOperation('+'))">+</button>
 
         </div>
         <div class="row justify-content-end">
@@ -57,7 +57,7 @@
 
             <button class="btn btn-outline-success col-3" @onclick="@(() =>WriteNum("0"))">0</button>
 
-            <button class="btn btn-warning col-3" @onclick="@(() =>Result())">=</button>
+            <button class="btn btn-outline-warning col-3" @onclick="@(() =>Result())">=</button>
 
         </div>
 
