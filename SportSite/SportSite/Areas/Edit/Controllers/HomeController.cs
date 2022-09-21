@@ -22,7 +22,7 @@ namespace SportSite.Areas.Edit.Controllers
         }
         private Account GetAccount(string? id = null)
         {
-            return _context.Accounts?.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity.Name);
+            return _context.Accounts.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity!.Name);
         }
         public int UnreadMessage()
         {
@@ -87,7 +87,7 @@ namespace SportSite.Areas.Edit.Controllers
                 if (ModelState.IsValid)
                 {
                     var account = GetAccount();
-                    account.Password = newpassword.Password;
+                    account.Password = newpassword!.Password;
                     await _context.SaveChangesAsync();
                 }
                 return RedirectToAction("DetailsUser");
@@ -152,7 +152,7 @@ namespace SportSite.Areas.Edit.Controllers
         {
             try
             {
-                var account = _context.Accounts.FirstOrDefault(a => a.Client.Id.ToString() == id);
+                var account = _context.Accounts.FirstOrDefault(a => a.Client!.Id.ToString() == id);
                 if (account != null)
                 {
                     _context.Accounts.Remove(account);
@@ -175,7 +175,7 @@ namespace SportSite.Areas.Edit.Controllers
                 tempCoaches.Add(new ClassCoach()
                 {
                     Id = item.Id,
-                    Name = $"{item.Account.Client.Name} {item.Account.Client.Surname}"
+                    Name = $"{item.Account.Client!.Name} {item.Account.Client.Surname}"
                 });
             }
             ViewBag.Coaches = new SelectList(tempCoaches, "Id", "Name");
@@ -235,7 +235,7 @@ namespace SportSite.Areas.Edit.Controllers
                 return View("/Views/Home/Logout");
             }
             var client = _context.Clients.FirstOrDefault(c => c.Account.Id == account.Id);
-            var trainings = _context.Trainings.Include(tr => tr.dayofWeeks). Where(tr => tr.Clients.Where(cl=>cl.Id == client.Id).Count()>0).ToList();
+            var trainings = _context.Trainings.Include(tr => tr.dayofWeeks). Where(tr => tr.Clients.Where(cl=>cl.Id == client!.Id).Count()>0).ToList();
             if (trainings != null && trainings.Count() > 0)
             {
                 return PartialView("/Views/Home/ViewTraning.cshtml", trainings);
@@ -244,7 +244,7 @@ namespace SportSite.Areas.Edit.Controllers
         }
         public IActionResult DeleteClientTraining(string id)
         {
-            var client = _context.Clients.Include(cl=>cl.trainings).FirstOrDefault(c => c.Account.Login == User.Identity.Name);
+            var client = _context.Clients.Include(cl=>cl.trainings).FirstOrDefault(c => c.Account.Login == User.Identity!.Name);
             if (client != null)
             {
                 var training = _context.Trainings.FirstOrDefault(tr => tr.Id.ToString() == id);
