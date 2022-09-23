@@ -55,10 +55,10 @@ namespace SportSite.Controllers
 
         public IActionResult CreateAccountCoach()
         {
-            var tempServices = new List<ClassCoach>();
+            var tempServices = new List<ClassPersonList>();
             foreach (var item in db.Services.Where(s => s.IsTypeSport))
             {
-                tempServices.Add(new ClassCoach()
+                tempServices.Add(new ClassPersonList()
                 {
                     Id = item.Id,
                     Name = $"{item.Name}"

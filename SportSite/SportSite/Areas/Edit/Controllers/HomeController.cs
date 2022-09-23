@@ -169,15 +169,27 @@ namespace SportSite.Areas.Edit.Controllers
         //
         public IActionResult CreateTraining()
         {
-            var tempCoaches = new List<ClassCoach>();
-            foreach (var item in _context.Coaches.Include(c => c.Account.Client))
+            var tempCoaches = new List<ClassPersonList>();
+            var listClients = new List<ClassPersonList>();
+            var clients = _context.Clients.Include(c => c.Account.Client);
+            foreach (var item in clients)
             {
-                tempCoaches.Add(new ClassCoach()
+                listClients.Add(new ClassPersonList()
                 {
                     Id = item.Id,
                     Name = $"{item.Account.Client!.Name} {item.Account.Client.Surname}"
                 });
             }
+            var coaches = _context.Coaches.Include(c => c.Account.Client);
+            foreach (var item in coaches)
+            {
+                tempCoaches.Add(new ClassPersonList()
+                {
+                    Id = item.Id,
+                    Name = $"{item.Account.Client!.Name} {item.Account.Client.Surname}"
+                });
+            }
+            ViewBag.Clients = new SelectList(listClients, "Id", "Name");
             ViewBag.Coaches = new SelectList(tempCoaches, "Id", "Name");
             return View();
         }
@@ -194,12 +206,21 @@ namespace SportSite.Areas.Edit.Controllers
                     Time = viewCreateTraining.Time
                 });
             }
-            _context.Trainings.Add(new Training()
+            var training = new Training()
             {
                 coach = _context.Coaches.FirstOrDefault(c => c.Id == viewCreateTraining.IdCoach),
                 training = viewCreateTraining.typeTraining,
                 dayofWeeks = dayOfWeekTrainings
-            });
+            };
+            if (viewCreateTraining.typeTraining==TypeTraining.Individual&& viewCreateTraining.IdClient!=null)
+            {
+                var client = _context.Clients.FirstOrDefault(c => c.Id == viewCreateTraining.IdClient);
+                if (client != null)
+                {
+                    training.Clients.Add(client);
+                }
+            }
+            _context.Trainings.Add(training);
             _context.SaveChanges();
             return CreateTraining();
         }
