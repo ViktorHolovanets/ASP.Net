@@ -141,8 +141,6 @@
                     type: "Get",
                     url: url,
                     success: function(result) {
-                        console.log(@ViewBag.UnreadMessage);
-                        console.log(result);
                         $('#num-message').html(result)
                     }
                 })
