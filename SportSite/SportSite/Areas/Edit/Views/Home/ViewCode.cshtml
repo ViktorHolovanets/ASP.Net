@@ -18,7 +18,7 @@
                     @Html.DisplayFor(modelItem => item.Code)
                 </td>
                 <td>
-                    <a asp-action="DeleteCode" asp-route-id="@item.Id">Delete</a>
+                    <button data-url='@Url.Action("DeleteCode", new{id=item.Id})' class="btn btn-outline-danger" onclick="DeleteCode(event)">Delete</button>
                 </td>
             </tr>
         }

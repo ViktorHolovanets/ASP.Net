@@ -158,5 +158,17 @@
                     }
                 })
         }
+        function DeleteCode(e) {
+            let btn = e.target
+            let url = btn.dataset.url;
+            if (url != "")
+                $.ajax({
+                    type: "Get",
+                    url: url,
+                    success: function (result) {
+                        $('#res').html(result)
+                    }
+                })
+        }
     </script>
 }

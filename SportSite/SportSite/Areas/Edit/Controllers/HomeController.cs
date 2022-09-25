@@ -140,13 +140,15 @@ namespace SportSite.Areas.Edit.Controllers
         public IActionResult DeleteCode(string? id)
         {
             var code = _context.Code.FirstOrDefault(a => a.Id.ToString() == id);
+            var account = GetAccount();
             if (code != null)
             {
                 _context.Code.Remove(code);
                 _context.SaveChanges();
             }
-            var account = GetAccount();
-            return View("ViewProfileManager");
+            
+            var message = _context.Code.Where(c => c.Сreator == account.Id).ToList();
+            return PartialView("Viewcode", message);
         }
         public IActionResult Delete(string? id)
         {
@@ -162,9 +164,9 @@ namespace SportSite.Areas.Edit.Controllers
             }
             catch
             {
-                return View("ViewProfileManager");
+                return View("ViewProfile");
             }
-            return View("ViewProfileManager");
+            return View("ViewProfile");
         }
         //
         public IActionResult CreateTraining()
