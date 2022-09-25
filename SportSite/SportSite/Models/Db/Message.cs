@@ -10,9 +10,8 @@ namespace SportSite.Models.Db
         [Required]
         public string? Name { get; set; }
         [Required]
-        public string? Tel { get; set; } 
+        public string? Tel { get; set; }
         public string? Comments { get; set; }
-        public bool IsRead { get; set; }=false;
-
+        public bool IsRead { get; set; } = false;
     }
 }

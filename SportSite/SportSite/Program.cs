@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using SportSite.Models.Db;
+using SportSite.Models.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,12 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 string connection = "Server=(localdb)\\mssqllocaldb;Database=SportDb;Trusted_Connection=True";
 builder.Logging.ClearProviders();
-builder.Logging.AddConsole();
-builder.Logging.AddDebug();
+builder.Logging.AddConsole();  //Logger write in the Console
+builder.Logging.AddDebug();  //Logger write in the Debug
 builder.Services.AddDbContext<Db>(options => options.UseSqlServer(connection));
-
+builder.Services.AddSignalR();  //SignalR
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie(options => //CookieAuthenticationOptions
+        .AddCookie(options =>  //CookieAuthenticationOptions
         {
             options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/");
         });
@@ -42,6 +43,7 @@ app.UseEndpoints(endpoints =>
       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
     );
 });
+app.MapHub<MessageHub>("/message");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

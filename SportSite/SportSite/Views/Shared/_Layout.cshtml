@@ -44,7 +44,7 @@
                                 <img src="~/Images/user.ico" id="profile" />
                             </a>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -126,7 +126,47 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script src="~/js/microsoft/signalr/dist/browser/signalr.min.js"></script>
     <script>
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl("/message")
+            .build();
+
+        // получение сообщения от сервера
+        hubConnection.on('Receive', function (message) {
+            let num = document.getElementById('num-message');
+            if (num != null)
+                num.innerHTML = `${message.countMessage}`;
+            let messages = document.getElementById('accordionFlushExample');
+            if (messages != null) {
+                let countmessage = messages.children.length;
+                if (countmessage) {
+                    let text = `
+                                <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-heading-${countmessage}">
+                                        <button class="accordion-button collapsed bg-secondary btn-read-message"
+                                            onclick="ClickMessage(event)"
+                                            data-url='/Edit/Home/ReadMessage/${message.message.id}' type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapse-${countmessage}" aria-expanded="false" aria-controls="flush-collapse-${countmessage}">
+                                            ${message.message.name}
+                                        </button>
+                                    </h2>
+                                                    <div id="flush-collapse-${countmessage}" class="accordion-collapse collapse" aria-labelledby="flush-heading-${countmessage}" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <p>Tel:  ${message.message.tel}</p>
+                                            <p> ${message.message.comments}</p>
+                                        </div>
+                                    </div>
+                                </div>`
+                    let oldText = messages.innerHTML;
+                    messages.innerHTML = `${text}${oldText}`;
+                }
+            }
+        });
+        hubConnection.start();
+
+
+
         $('#send-form').on('click', function () {
             $.ajax({
                 type: "Post",

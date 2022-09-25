@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SportSite.Models;
 using SportSite.Models.Db;
+using SportSite.Models.SignalR;
 using SportSite.ViewModels;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -15,10 +17,12 @@ namespace SportSite.Controllers
     public class HomeController : Controller
     {
         Db db;
+        IHubContext<MessageHub> hubContext;
         private readonly ILogger<HomeController> _logger;
-        public HomeController(Db db, ILogger<HomeController> logger)
+        public HomeController(Db db, ILogger<HomeController> logger, IHubContext<MessageHub> hubContext)
         {
             this.db = db;
+            this.hubContext = hubContext;
             if (db.Services.Count() < 1)
             {
                 db.AddTypeSport();
@@ -104,7 +108,7 @@ namespace SportSite.Controllers
             }
             return View("Index", db.Services);
         }
-        public JsonResult NewMessage()
+        public async Task<JsonResult> NewMessageAsync()
         {
             try
             {
@@ -116,6 +120,12 @@ namespace SportSite.Controllers
                 };
                 db.Messages.Add(m);
                 db.SaveChanges();
+                var message = new MessageSignalR()
+                {
+                    Message = m,
+                    CountMessage = db.Messages.Count(m=>!m.IsRead)
+                };
+                await hubContext.Clients.All.SendAsync("Receive", message);
             }
             catch (Exception)
             {

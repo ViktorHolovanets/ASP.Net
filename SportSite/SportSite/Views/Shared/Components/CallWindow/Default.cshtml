@@ -7,15 +7,15 @@
     <form id="form-call" method="post" onsubmit="return false">
         <label>
             Name:<br />
-            <input type="text" name="Name" pattern="[A-Za-z]{3,}" />
+            <input type="text" name="Name" pattern="[A-Za-z]{3,}" id="name-user"/>
         </label>
         <label>
             Tel:<br />
-            <input type="tel" name="tel" pattern="^[380][0-9]{9}$" placeholder="380*********"/>
+            <input type="tel" name="tel" pattern="^[380][0-9]{9}$" placeholder="380*********" id="tel-user" />
         </label>
         <label>
             Comments:<br />
-            <textarea name="comments"></textarea>
+            <textarea name="comments" id="comment-user"></textarea>
         </label>
         <input type="submit" value="Send" id="send-form" class="btn btn-success"/>
         <input type="button" value="Close" id="close-form" class="btn btn-danger"/>
