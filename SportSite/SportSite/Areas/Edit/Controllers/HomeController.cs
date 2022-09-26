@@ -21,12 +21,6 @@ namespace SportSite.Areas.Edit.Controllers
         {
             _context = context;
         }
-        [AcceptVerbs("Get", "Post")]
-        public IActionResult IsLogin(string login)
-        {
-
-            return _context.Accounts.FirstOrDefault(u => u.Login == login) != null ? Json(false) : Json(true);
-        }
         private Account GetAccount(string? id = null)
         {
             return _context.Accounts.Include(a => a.Client).FirstOrDefault(id != null ? a => a.Id.ToString() == id : a => a.Login == User.Identity!.Name);
@@ -322,7 +316,6 @@ namespace SportSite.Areas.Edit.Controllers
                 _context.Accounts.Add(user);
                 _context.SaveChanges();
                 return RedirectToAction("ViewProfile");
-
             }
             return View();
         }

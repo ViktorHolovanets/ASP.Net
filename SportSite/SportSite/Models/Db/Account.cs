@@ -16,7 +16,7 @@ namespace SportSite.Models.Db
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Required]
-        [Remote(action: "IsLogin", controller: "Home", ErrorMessage = "Incorrect login")]
+        [Remote(action: "IsLogin", areaName:"", controller: "Home", ErrorMessage = "Incorrect login")]
         public string? Login { get; set; }
         [Required]
         [DataType(DataType.Password)]
