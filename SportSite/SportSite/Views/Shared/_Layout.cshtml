@@ -133,7 +133,9 @@
             .build();
         // receiving a message from the server
         hubConnection.on('Receive', function (message) {
-            let num = document.getElementById('num-message');
+        @if (User.IsInRole("manager"))
+        {
+             let num = document.getElementById('num-message');
             if (num != null)
                 num.innerHTML = `${message.countMessage}`;
             let messages = document.getElementById('accordionFlushExample');
@@ -161,6 +163,8 @@
                     messages.innerHTML = `${text}${oldText}`;
                 }
             }
+        }
+
         });
         hubConnection.start();
 
