@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Xml.Linq;
 using Web_Api.Models;
 
 namespace Web_Api.Controllers

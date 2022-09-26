@@ -1,0 +1,22 @@
+﻿@using SportSite.Models.Db
+@using Microsoft.AspNetCore.Components
+@using System.Net.Http
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.JSInterop
+@using System.IO
+<div class="row justify-content-evenly">
+    @foreach (var item in training)
+    {
+        <TrainingComponent item="@item" OnCallback="@OnClickCallback" />
+    }
+</div>
+@code {
+    [Parameter]
+    public IEnumerable<Training> training { get; set; }
+    [Parameter]
+    public EventCallback<Guid> OnClickCallback { get; set; }
+}

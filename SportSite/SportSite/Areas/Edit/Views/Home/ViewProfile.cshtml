@@ -24,10 +24,7 @@
                         </li>
                     }
                     <li class="nav-item m-1">
-                        <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-code" value="View Code" />                       
-                    </li>
-                    <li class="nav-item m-1">                        
-                        <input type="button" class="btn btn-success text-white font-weight-bold font-italic" id="create-code" value="Create Code" />
+                        <input type="button" class="btn btn-primary text-white font-weight-bold font-italic" id="get-code" value="View Code" />
                     </li>
                     <li class="nav-item m-1">
                         <button type="button" class="btn btn-primary position-relative" id="get-message">
@@ -40,6 +37,9 @@
                     </li>
                     <li class="nav-item m-1">
                         <a class="btn btn-primary text-white font-weight-bold font-italic" asp-action="CreateTraining">Create training</a>
+                    </li>
+                    <li class="nav-item m-1">
+                        <a class="btn btn-primary text-white font-weight-bold font-italic" asp-action="ViewTrainings">Trainings</a>
                     </li>
                 </ul>
             </div>
@@ -55,7 +55,7 @@
         <div id="res" class="bg-white">
             @if (User.IsInRole("client"))
             {
-                {await Html.RenderPartialAsync("ViewProfileClient");}
+                { await Html.RenderPartialAsync("ViewProfileClient"); }
             }
             else if (User.IsInRole("coach"))
             {
@@ -68,16 +68,16 @@
     @if (User.IsInRole("client"))
     {
         <script>
-        $(() => {
-            $.ajax({
-                type: "Get",
-                url: '@Url.Action("ViewClientTraining", new{IsView=false})',
-                success: function(result) {
-                    $('#result').html(result);
-                }
+            $(() => {
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("ViewClientTraining", new{IsView=false})',
+                    success: function (result) {
+                        $('#result').html(result);
+                    }
+                });
             });
-        });
-    </script>
+        </script>
     }
     else if (User.IsInRole("coach"))
     {
@@ -88,7 +88,7 @@
                     url: '@Url.Action("ProfileCoach")',
                     success: function (result) {
                         $('#result').html(result)
-                        $('.trainings').on('click',function(){
+                        $('.trainings').on('click', function () {
                             $(this).find('.view-clients').toggleClass('d-none');
                             $(this).find('.view-traing').toggleClass('d-none');
                         })
@@ -98,33 +98,31 @@
         </script>
     }
     <script>
-        
-        $('#get-clients').on('click', function() {
+
+        $('#get-clients').on('click', function () {
             GetList("@Url.Action("ViewUsers")");
         });
-        $('#get-coaches').on('click', function() {
+        $('#get-coaches').on('click', function () {
             GetList("@Url.Action("ViewUsers", new{role=Role.coach})");
         });
-        $('#get-manager').on('click', function() {
+        $('#get-manager').on('click', function () {
             GetList("@Url.Action("ViewUsers", new{role=Role.manager})");
         });
-        $('#get-admin').on('click', function() {
+        $('#get-admin').on('click', function () {
             GetList("@Url.Action("ViewUsers", new{role=Role.admin})");
         });
-        $('#get-code').on('click', function() {
+        $('#get-code').on('click', function () {
             GetList("@Url.Action("ViewCode")");
         });
-        $('#create-code').on('click', function() {
-            GetList("@Url.Action("CreateCode")");
-        });
-        $('#get-message').on('click', function() {
+
+        $('#get-message').on('click', function () {
             GetList("@Url.Action("GetMessage")");
         });
         function GetList(url) {
             $.ajax({
                 type: "Get",
                 url: url,
-                success: function(result) {
+                success: function (result) {
                     $('#res').html(result)
                     console.log(result);
                 }
@@ -140,7 +138,7 @@
                 $.ajax({
                     type: "Get",
                     url: url,
-                    success: function(result) {
+                    success: function (result) {
                         $('#num-message').html(result)
                     }
                 })
@@ -162,13 +160,7 @@
             let btn = e.target
             let url = btn.dataset.url;
             if (url != "")
-                $.ajax({
-                    type: "Get",
-                    url: url,
-                    success: function (result) {
-                        $('#res').html(result)
-                    }
-                })
+                GetList(url);
         }
     </script>
 }

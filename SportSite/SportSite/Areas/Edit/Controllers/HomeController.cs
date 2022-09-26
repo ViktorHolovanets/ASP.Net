@@ -295,6 +295,9 @@ namespace SportSite.Areas.Edit.Controllers
             }
             return PartialView();
         }
-        
+        public IActionResult ViewTrainings()
+        {
+            return View();
+        }
     }
 }

@@ -13,6 +13,10 @@ builder.Logging.AddConsole();  //Logger write in the Console
 builder.Logging.AddDebug();  //Logger write in the Debug
 builder.Services.AddDbContext<Db>(options => options.UseSqlServer(connection));
 builder.Services.AddSignalR();  //SignalR
+builder.Services.AddHttpClient();
+builder.Services.AddRazorPages();  // Blazor
+builder.Services.AddServerSideBlazor();  // Blazor
+builder.Services.AddControllersWithViews();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
         .AddCookie(options =>  //CookieAuthenticationOptions
         {
@@ -43,6 +47,9 @@ app.UseEndpoints(endpoints =>
     );
 });
 app.MapHub<MessageHub>("/message");
+app.MapRazorPages();
+app.MapBlazorHub();
+app.MapControllers();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

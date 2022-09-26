@@ -7,7 +7,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Code)
             </th>
-            <th></th>
+            <th>
+                <button data-url='@Url.Action("CreateCode")' class="btn btn-outline-success" onclick="DeleteCode(event)">Create code</button>
+            </th>
         </tr>
     </thead>
     <tbody>

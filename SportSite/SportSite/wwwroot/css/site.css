@@ -153,3 +153,10 @@ body {
 #form-call >label>*{
     width:100%
 }
+footer {
+    background-color: black;
+    padding:15px;
+}
+/*.btn{
+    min-width:115px;
+}*/
