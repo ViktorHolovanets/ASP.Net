@@ -139,6 +139,21 @@ namespace SportSite.Models.Db
                 Password = "manager",
                 Role = Role.manager
             });
+            Accounts.Add(new Account()
+            {
+                Client = new User()
+                {
+                    Age = 35,
+                    Email = "asd@asd.com",
+                    Gender = Gender.Female,
+                    Name = "admin",
+                    Surname = "admin",
+                    Tel = "+3802222"
+                },
+                Login = "admin",
+                Password = "admin",
+                Role = Role.admin
+            });
             Coaches.Add(new Coach()
             {
                 Account = new Account()

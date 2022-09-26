@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using SportSite.Areas.Edit.ViewModels;
 using SportSite.Models;
 using SportSite.Models.Db;
+using SportSite.ViewModels;
 using System.Linq;
 
 namespace SportSite.Areas.Edit.Controllers
@@ -19,6 +20,12 @@ namespace SportSite.Areas.Edit.Controllers
         public HomeController(Db context)
         {
             _context = context;
+        }
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult IsLogin(string login)
+        {
+
+            return _context.Accounts.FirstOrDefault(u => u.Login == login) != null ? Json(false) : Json(true);
         }
         private Account GetAccount(string? id = null)
         {
@@ -226,11 +233,12 @@ namespace SportSite.Areas.Edit.Controllers
             _context.SaveChanges();
             return CreateTraining();
         }
+        [Authorize(Roles = "manager")]
         public IActionResult GetMessage()
         {
             return PartialView(_context.Messages.OrderBy(m => m.IsRead));
         }
-
+        [Authorize(Roles = "manager")]
         public IActionResult ReadMessage(string? id)
         {
             var message = _context.Messages.FirstOrDefault(m => m.Id.ToString() == id && !m.IsRead);
@@ -297,6 +305,25 @@ namespace SportSite.Areas.Edit.Controllers
         }
         public IActionResult ViewTrainings()
         {
+            return View();
+        }
+        [Authorize(Roles = "manager")]
+        public IActionResult CreateManager()
+        { 
+            return View();
+        }
+        [Authorize(Roles = "manager")]
+        [HttpPost]
+        public IActionResult CreateManager(Account user)
+        {
+            if (ModelState.IsValid)
+            {
+                user.Role = Role.manager;
+                _context.Accounts.Add(user);
+                _context.SaveChanges();
+                return RedirectToAction("ViewProfile");
+
+            }
             return View();
         }
     }
