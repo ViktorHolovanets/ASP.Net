@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.SqlClient;
 using SportSite.Models.Db;
 using SportSite.Models.SignalR;
 
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-string connection = "Server=(localdb)\\mssqllocaldb;Database=SportDb;Trusted_Connection=True";
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();  //Logger write in the Console
 builder.Logging.AddDebug();  //Logger write in the Debug

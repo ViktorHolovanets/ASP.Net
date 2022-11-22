@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Data.SqlClient;
 namespace SportSite.Models.Db
 {
     public class Db : DbContext

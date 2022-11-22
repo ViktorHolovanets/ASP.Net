@@ -3,5 +3,7 @@
 namespace SportSite.Models.SignalR
 {
     public class MessageHub : Hub
-    { }
+    { 
+        //
+    }
 }
