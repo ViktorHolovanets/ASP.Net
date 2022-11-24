@@ -15,10 +15,10 @@ html {
 
 body {
     margin-bottom: 60px;
-    /*background-image: url(../Images/2968326.webp);
+    background-image: url(../Images/2968326.webp);
     background-repeat: no-repeat;
-    background-attachment: fixed;*/
-    background-color:aqua;
+    background-attachment: fixed;
+    /*background-color:aqua;*/
     color: white;
 }
 
